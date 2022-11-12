@@ -1,12 +1,15 @@
-[gd_resource type="TileSet" load_steps=17 format=3 uid="uid://dugjqny2wd38q"]
+[gd_resource type="TileSet" load_steps=19 format=3 uid="uid://dugjqny2wd38q"]
 
 [ext_resource type="Texture2D" uid="uid://28rotrm0kvcv" path="res://icon.svg" id="1_085b7"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y1c72"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e7ddd"]
 resource_name = "Wall"
 texture = ExtResource("1_085b7")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
+0:0/0/material = SubResource("CanvasItemMaterial_y1c72")
 
 [sub_resource type="Gradient" id="Gradient_0mnwx"]
 offsets = PackedFloat32Array(0, 0.415385, 1)
@@ -40,6 +43,8 @@ texture_region_size = Vector2i(128, 128)
 3:3/0 = 0
 0:0/0 = 0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xtqm5"]
+
 [sub_resource type="Gradient" id="Gradient_y8oav"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wnro0"]
@@ -68,6 +73,7 @@ texture_region_size = Vector2i(128, 128)
 2:3/0 = 0
 3:3/0 = 0
 0:0/0 = 0
+0:0/0/material = SubResource("CanvasItemMaterial_xtqm5")
 
 [sub_resource type="Gradient" id="Gradient_4i4o3"]
 colors = PackedColorArray(0, 1, 0, 1, 1, 1, 0, 1)
