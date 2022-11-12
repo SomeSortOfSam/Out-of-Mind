@@ -1,7 +1,7 @@
 extends TileMap
 
-const PLAYER_START_CELL = 4
-const EXIT_CELL = 3
+const PLAYER_START_CELL := 4
+const EXIT_CELL := 3
 
 @export var player_scene : PackedScene
 
@@ -13,7 +13,9 @@ func _ready():
 
 func spwan_player(cell : Vector2i):
 	var player : Node2D = player_scene.instantiate()
-	player.position = cell * tile_set.cell_size + tile_set.cell_size/2.0
+	player.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
+	player.top_level = true
+	add_child(player)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

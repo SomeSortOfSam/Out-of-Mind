@@ -14,3 +14,7 @@ config/name="Stay Out Of Sight"
 run/main_scene="res://Levels/level01.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.0980392, 0.0980392, 0.0980392, 1)
