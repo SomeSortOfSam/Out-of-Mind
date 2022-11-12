@@ -1,13 +1,17 @@
-[gd_resource type="TileSet" load_steps=15 format=3 uid="uid://dugjqny2wd38q"]
+
+[gd_resource type="TileSet" load_steps=19 format=3 uid="uid://dugjqny2wd38q"]
 
 [ext_resource type="Texture2D" uid="uid://28rotrm0kvcv" path="res://icon.svg" id="1_085b7"]
 [ext_resource type="Texture2D" uid="uid://ye6ck7lff8r2" path="res://glass_tiles.png" id="2_lntwd"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y1c72"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e7ddd"]
 resource_name = "Wall"
 texture = ExtResource("1_085b7")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
+0:0/0/material = SubResource("CanvasItemMaterial_y1c72")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7cnu0"]
 resource_name = "Glass"
@@ -345,6 +349,8 @@ texture_region_size = Vector2i(64, 64)
 8:2/0/terrains_peering_bit/top_side = 0
 8:2/0/terrains_peering_bit/top_right_corner = 0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xtqm5"]
+
 [sub_resource type="Gradient" id="Gradient_y8oav"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wnro0"]
@@ -374,6 +380,7 @@ texture_region_size = Vector2i(64, 64)
 2:3/0 = 0
 3:3/0 = 0
 0:0/0 = 0
+0:0/0/material = SubResource("CanvasItemMaterial_xtqm5")
 
 [sub_resource type="Gradient" id="Gradient_4i4o3"]
 colors = PackedColorArray(0, 1, 0, 1, 1, 1, 0, 1)

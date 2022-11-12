@@ -1,10 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8n2r5xk4334"]
+[gd_scene load_steps=5 format=3 uid="uid://b8n2r5xk4334"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_7na2c"]
 [ext_resource type="Texture2D" uid="uid://28rotrm0kvcv" path="res://icon.svg" id="1_emui3"]
+
+[sub_resource type="Gradient" id="Gradient_vyyin"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s74ti"]
+gradient = SubResource("Gradient_vyyin")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_7na2c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
 texture = ExtResource("1_emui3")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_s74ti")
+texture_scale = 20.0
