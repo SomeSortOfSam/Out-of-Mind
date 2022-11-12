@@ -41,8 +41,11 @@ func recaculate_line_of_sight():
 			var collision_cell = raycast.get_collider().name
 			if collision_cell == str(cell):
 				in_sight_set.append(cell)
+				map.get_cell_tile_data(1,cell).modulate = map.on_color
 			elif Vector2(cell) in in_sight_set:
 				map.erase_cell(1,cell)
-				map.get_node(str(cell)).queue_free()
+				var node = map.get_node(str(cell))
+				if node:
+					node.queue_free()
 				map.set_cells_terrain_connect(2,[cell],0,2)
 				map.force_update(2)

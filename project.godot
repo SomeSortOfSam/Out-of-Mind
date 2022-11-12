@@ -13,15 +13,9 @@ _global_script_classes=[{
 "class": &"Player",
 "language": &"GDScript",
 "path": "res://Player.gd"
-}, {
-"base": "TextureRect",
-"class": &"ScrollingBackround",
-"language": &"GDScript",
-"path": "res://ScrollingBackground.gd"
 }]
 _global_script_class_icons={
-"Player": "",
-"ScrollingBackround": ""
+"Player": ""
 }
 
 [application]
