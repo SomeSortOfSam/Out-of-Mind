@@ -10,6 +10,7 @@ const EXIT_CELL_ID := 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_node("Camera2D").position = get_used_rect().position + get_used_rect().size/2 * tile_set.tile_size 
 	for cell in get_used_cells(0):
 		var cell_id = get_cell_source_id(0,cell)
 		if cell_id == PLAYER_START_CELL_ID:
