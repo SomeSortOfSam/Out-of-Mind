@@ -13,11 +13,9 @@ func _ready():
 		var cell_id = get_cell_source_id(0,cell)
 		if cell_id == PLAYER_START_CELL_ID:
 			spawn_player(cell)
-			set_cell(0,cell)
+			erase_cell(0,cell)
 	for cell in get_used_cells(1):
-		var cell_id = get_cell_source_id(1,cell)
-		if cell_id == WALL_CELL_ID:
-			spawn_occluder(cell)
+		spawn_occluder(cell, get_cell_source_id(1,cell))
 
 func spawn_player(cell : Vector2i):
 	var player : Player = player_scene.instantiate()
@@ -26,8 +24,8 @@ func spawn_player(cell : Vector2i):
 	player.current_cell = cell
 	add_child(player)
 
-func spawn_occluder(cell : Vector2i):
-	var occluder : LightOccluder2D = occluder_scene.instantiate()
+func spawn_occluder(cell : Vector2i, cell_id : int):
+	var occluder : StaticBody2D = occluder_scene.instantiate()
 	occluder.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
-	#occluder.top_level = true
+	occluder.get_node("Occluder").visible = cell_id == WALL_CELL_ID
 	add_child(occluder)
