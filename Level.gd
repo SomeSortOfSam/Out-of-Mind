@@ -28,8 +28,5 @@ func spawn_occluder(cell : Vector2i, cell_id : int):
 	var occluder : StaticBody2D = occluder_scene.instantiate()
 	occluder.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
 	occluder.get_node("Occluder").visible = cell_id == WALL_CELL_ID
+	occluder.name = str(cell)
 	add_child(occluder)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
