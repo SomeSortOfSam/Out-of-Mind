@@ -6,7 +6,6 @@
 position = Vector2(0, 14)
 layer_0/name = "Utility"
 layer_0/tile_data = PackedInt32Array(196611, 4, 0, 65539, 3, 0)
-
 layer_1/name = "Walls"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
