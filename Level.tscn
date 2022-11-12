@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://crkimwjq3y6dk"]
+
+[ext_resource type="TileSet" uid="uid://dugjqny2wd38q" path="res://TileSet.tres" id="1_62qqt"]
+[ext_resource type="Script" path="res://Level.gd" id="2_xghl8"]
+[ext_resource type="PackedScene" uid="uid://b8n2r5xk4334" path="res://Player.tscn" id="3_g7t2i"]
+
+[node name="Level" type="TileMap"]
+tile_set = ExtResource("1_62qqt")
+format = 2
+script = ExtResource("2_xghl8")
+player_scene = ExtResource("3_g7t2i")
