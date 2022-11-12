@@ -36,10 +36,13 @@ func recaculate_line_of_sight():
 	for cell in map.get_used_cells(1):
 		raycast.target_position = to_local(cell * map.tile_set.tile_size * 1.0 + map.tile_set.tile_size/2.0)
 		await get_tree().physics_frame
-		var collision_cell := map.local_to_map(raycast.get_collision_point())
-		if collision_cell == cell && in_sight_set.append(cell):
-			map.get_cell_tile_data(1,cell).modulate = Color.DARK_GREEN
-		elif (raycast.is_colliding() || collision_cell != cell) && Vector2(cell) in in_sight_set:
-			map.set_cell(1,cell,-1,Vector2i.ONE * -1,0)
-			if raycast.is_colliding():
-				(raycast.get_collider() as Node2D).get_node("..").queue_free()
+		if raycast.is_colliding():
+			var collision_cell = map.local_to_map(raycast.get_collision_point())
+			if collision_cell == cell:
+				in_sight_set.append(cell)
+				map.get_cell_tile_data(1,cell).modulate = Color.DARK_GOLDENROD
+			elif Vector2(cell) in in_sight_set:
+				map.erase_cell(1,cell)
+				(raycast.get_collider() as Node2D).get_parent().queue_free()
+				map.set_cell(2,cell,2)
+				map.force_update(2)
