@@ -12,12 +12,14 @@ func _ready():
 	for cell in get_used_cells(0):
 		var cell_id = get_cell_source_id(0,cell)
 		if cell_id == PLAYER_START_CELL_ID:
-			spwan_player(cell)
-			set_cell(0,cell,2)
+			spawn_player(cell)
+			set_cell(0,cell)
+	for cell in get_used_cells(1):
+		var cell_id = get_cell_source_id(1,cell)
 		if cell_id == WALL_CELL_ID:
 			spawn_occluder(cell)
 
-func spwan_player(cell : Vector2i):
+func spawn_player(cell : Vector2i):
 	var player : Player = player_scene.instantiate()
 	player.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
 	player.top_level = true
