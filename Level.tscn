@@ -1,9 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://crkimwjq3y6dk"]
+[gd_scene load_steps=11 format=3 uid="uid://crkimwjq3y6dk"]
 
 [ext_resource type="TileSet" uid="uid://dugjqny2wd38q" path="res://TileSet.tres" id="1_62qqt"]
 [ext_resource type="Script" path="res://Level.gd" id="2_xghl8"]
 [ext_resource type="PackedScene" uid="uid://b8n2r5xk4334" path="res://Player.tscn" id="3_g7t2i"]
 [ext_resource type="PackedScene" uid="uid://p8fsxk1rvpuy" path="res://Occluder.tscn" id="4_nt24j"]
+[ext_resource type="Texture2D" uid="uid://b8xcuq8emrc2b" path="res://ParticleFade.png" id="5_mg0gh"]
+
+[sub_resource type="Gradient" id="Gradient_drr1w"]
+offsets = PackedFloat32Array(0, 0.538071, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.38, 0.38, 0.38, 0.180392, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xf1a8"]
+gradient = SubResource("Gradient_drr1w")
+
+[sub_resource type="Curve" id="Curve_bh3tx"]
+_data = [Vector2(0, 0.490909), 0.0, 0.0, 0, 0, Vector2(0.5, 0.981818), 0.0, 0.0, 0, 0, Vector2(1, 0.490909), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8dvyv"]
+curve = SubResource("Curve_bh3tx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gl2by"]
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_box_extents = Vector3(600, 400, 1)
+particle_flag_disable_z = true
+gravity = Vector3(0, -10, 0)
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = -720.0
+angle_max = 720.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_8dvyv")
+color_ramp = SubResource("GradientTexture1D_xf1a8")
 
 [node name="Level" type="TileMap"]
 tile_set = ExtResource("1_62qqt")
@@ -11,3 +42,12 @@ format = 2
 script = ExtResource("2_xghl8")
 player_scene = ExtResource("3_g7t2i")
 occluder_scene = ExtResource("4_nt24j")
+
+[node name="VoidParticles" type="GPUParticles2D" parent="."]
+amount = 10
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_gl2by")
+texture = ExtResource("5_mg0gh")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
