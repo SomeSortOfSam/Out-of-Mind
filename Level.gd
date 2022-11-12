@@ -12,9 +12,10 @@ func _ready():
 			spwan_player(cell)
 
 func spwan_player(cell : Vector2i):
-	var player : Node2D = player_scene.instantiate()
+	var player : Player = player_scene.instantiate()
 	player.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
 	player.top_level = true
+	player.current_cell = cell
 	add_child(player)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

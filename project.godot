@@ -8,6 +8,16 @@
 
 config_version=5
 
+_global_script_classes=[{
+"base": "Node2D",
+"class": &"Player",
+"language": &"GDScript",
+"path": "res://Player.gd"
+}]
+_global_script_class_icons={
+"Player": ""
+}
+
 [application]
 
 config/name="Stay Out Of Sight"
