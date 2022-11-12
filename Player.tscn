@@ -21,6 +21,8 @@ texture = ExtResource("1_emui3")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 1
 texture = SubResource("GradientTexture2D_s74ti")
 texture_scale = 20.0
 
