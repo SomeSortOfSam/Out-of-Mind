@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://p8fsxk1rvpuy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfnaa"]
-size = Vector2(63, 63)
+size = Vector2(64, 64)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_epckx"]
 cull_mode = 1

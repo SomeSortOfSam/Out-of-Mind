@@ -6,6 +6,7 @@ const EXIT_CELL_ID := 3
 
 @export var player_scene : PackedScene
 @export var occluder_scene : PackedScene
+@export var on_color : Color
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +16,10 @@ func _ready():
 			spawn_player(cell)
 			erase_cell(0,cell)
 	for cell in get_used_cells(1):
-		spawn_occluder(cell, get_cell_source_id(1,cell))
+		var cell_id = get_cell_source_id(1,cell)
+		if cell_id == WALL_CELL_ID:
+			spawn_occluder(cell)
+		get_cell_tile_data(1,cell).modulate = Color.DARK_GRAY
 
 func spawn_player(cell : Vector2i):
 	var player : Player = player_scene.instantiate()
@@ -24,9 +28,8 @@ func spawn_player(cell : Vector2i):
 	player.current_cell = cell
 	add_child(player)
 
-func spawn_occluder(cell : Vector2i, cell_id : int):
+func spawn_occluder(cell : Vector2i):
 	var occluder : StaticBody2D = occluder_scene.instantiate()
 	occluder.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
-	occluder.get_node("Occluder").visible = cell_id == WALL_CELL_ID
 	occluder.name = str(cell)
 	add_child(occluder)

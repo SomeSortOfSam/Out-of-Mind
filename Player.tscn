@@ -16,12 +16,15 @@ script = ExtResource("1_7na2c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2
+position = Vector2(0, 16)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_emui3")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, 16)
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_s74ti")
 texture_scale = 20.0
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 16)
