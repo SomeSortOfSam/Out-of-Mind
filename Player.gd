@@ -3,6 +3,8 @@ extends Node2D
 
 const WIN_TILE_ID := 3
 const GLASS_TILE_ID := 1
+const WALL_EXCEPTIONS := [-1,WIN_TILE_ID]
+const OCCLUDER_EXCEPTIONS := [GLASS_TILE_ID,WIN_TILE_ID]
 const MAX_VOID := 5
 
 @onready var map : TileMap = $".."
@@ -15,26 +17,30 @@ var in_sight_set : PackedVector2Array
 var void_count := 0.0
 
 signal won
-signal requesting_restart
+signal lose
 
 func _ready():
 	recaculate_line_of_sight()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if (!tween || !tween.is_running()):
-		if map.get_cell_source_id(2,current_cell) == -1:
-			move_in_direction(previous_direction)
-			void_count += 1
-			if void_count > MAX_VOID:
-				emit_signal("requesting_restart")
-				queue_free()
-		else:
-			void_count = clamp(void_count - .01, 0, MAX_VOID)
-		modulate = lerp(Color.WHITE,Color(1,1,1,0),void_count/MAX_VOID)
+	do_void_check()
 	if _handle_inputs():
 		recaculate_line_of_sight()
-	
+
+func do_void_check():
+	modulate = lerp(Color.WHITE,Color(1,1,1,0),void_count/MAX_VOID)
+	if (!tween || !tween.is_running()):
+		if map.get_cell_source_id(2,current_cell) == -1:
+			var next_cell = current_cell + previous_direction
+			var next_cell_id = map.get_cell_source_id(1,next_cell)
+			move_in_direction(previous_direction if next_cell_id in WALL_EXCEPTIONS else -previous_direction )
+			void_count += 1
+			if void_count > MAX_VOID:
+				emit_signal("lose")
+				queue_free()
+		else:
+			void_count = clamp(void_count - .1, 0, MAX_VOID)
 
 func _handle_inputs() -> bool:
 	@warning_ignore(narrowing_conversion)
@@ -42,7 +48,7 @@ func _handle_inputs() -> bool:
 	if (!tween || !tween.is_running()) && \
 		input != Vector2i.ZERO && \
 		(input.x == 0) != (input.y == 0) && \
-		map.get_cell_source_id(1,current_cell + input) == -1:
+		map.get_cell_source_id(1,current_cell + input) in WALL_EXCEPTIONS:
 		move_in_direction(input)
 		return true
 	return false
@@ -52,14 +58,14 @@ func move_in_direction(direction : Vector2i):
 	tween = create_tween()
 	var _tween = tween.tween_property(self,"position",position + direction * map.tile_set.tile_size * 1.0,.2)
 	previous_direction = direction
-	if map.get_cell_source_id(0,current_cell) == WIN_TILE_ID:
+	if map.get_cell_source_id(1,current_cell) == WIN_TILE_ID:
 		var _signal = emit_signal("won")
 
 func recaculate_line_of_sight():
 	for cell in map.get_used_cells(1):
 		if get_is_visible(cell):
 			in_sight_set.append(cell)
-			if map.get_cell_source_id(1,cell) != GLASS_TILE_ID:
+			if map.get_cell_source_id(1,cell) not in OCCLUDER_EXCEPTIONS:
 				map.get_cell_tile_data(1,cell).modulate = map.on_color
 		elif Vector2(cell) in in_sight_set:
 			destory_cell(cell)
@@ -72,7 +78,7 @@ func get_is_visible(cell : Vector2i) -> bool:
 	to_local(cell * map.tile_set.tile_size + map.tile_set.tile_size * Vector2i.DOWN + Vector2i(-1,1) * 4)]:
 		raycast.target_position = target_position
 		raycast.force_raycast_update()
-		if map.get_cell_source_id(1,cell) == GLASS_TILE_ID:
+		if map.get_cell_source_id(1,cell) in OCCLUDER_EXCEPTIONS:
 			if !raycast.is_colliding():
 				return true
 		elif raycast.is_colliding():
@@ -81,8 +87,10 @@ func get_is_visible(cell : Vector2i) -> bool:
 	return false
 
 func destory_cell(cell : Vector2i):
+	if map.get_cell_source_id(1,cell) == WIN_TILE_ID:
+		emit_signal("lose")
 	map.erase_cell(1,cell)
-	var node = map.get_node(str(cell))
+	var node = map.get_node_or_null(str(cell))
 	if node:
 		node.queue_free()
 	map.set_cells_terrain_connect(2,[cell],0,2)
