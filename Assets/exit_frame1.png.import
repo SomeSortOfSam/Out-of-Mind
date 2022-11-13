@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dli51rpbfc0w5"
-path="res://.godot/imported/scorch.png-7e131ab97f1241e5e4e60e2105dcbf75.ctex"
+uid="uid://cu5i62m6pjeks"
+path="res://.godot/imported/exit_frame1.png-658013a997ab31931dd72a31d01ef3ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scorch.png"
-dest_files=["res://.godot/imported/scorch.png-7e131ab97f1241e5e4e60e2105dcbf75.ctex"]
+source_file="res://Assets/exit_frame1.png"
+dest_files=["res://.godot/imported/exit_frame1.png-658013a997ab31931dd72a31d01ef3ef.ctex"]
 
 [params]
 

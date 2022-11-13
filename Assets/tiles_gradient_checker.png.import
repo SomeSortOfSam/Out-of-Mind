@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8xcuq8emrc2b"
-path="res://.godot/imported/ParticleFade.png-bd9fc10c5acb0d468bd9e7088ea85995.ctex"
+uid="uid://c4l7hxiywjdu6"
+path="res://.godot/imported/tiles_gradient_checker.png-8374e55ede273d6780fbcc4d7ac4ad62.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ParticleFade.png"
-dest_files=["res://.godot/imported/ParticleFade.png-bd9fc10c5acb0d468bd9e7088ea85995.ctex"]
+source_file="res://Assets/tiles_gradient_checker.png"
+dest_files=["res://.godot/imported/tiles_gradient_checker.png-8374e55ede273d6780fbcc4d7ac4ad62.ctex"]
 
 [params]
 

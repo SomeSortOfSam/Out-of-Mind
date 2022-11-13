@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5ocnncxkap7c"
-path="res://.godot/imported/tiles_panel.png-007017e42d4a7a4d58f24fbfb0c1a415.ctex"
+uid="uid://cm1dqdhybny8c"
+path="res://.godot/imported/tiles_gradient.png-fb4bd085823808f01566e3b4db1a8b78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles_panel.png"
-dest_files=["res://.godot/imported/tiles_panel.png-007017e42d4a7a4d58f24fbfb0c1a415.ctex"]
+source_file="res://Assets/tiles_gradient.png"
+dest_files=["res://.godot/imported/tiles_gradient.png-fb4bd085823808f01566e3b4db1a8b78.ctex"]
 
 [params]
 

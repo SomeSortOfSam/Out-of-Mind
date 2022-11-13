@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f87alhg04v0r"
-path="res://.godot/imported/particle_aura.png-5c5117a8d244ade337d437c02c525c6e.ctex"
+uid="uid://bjtjqnovp5v5k"
+path="res://.godot/imported/exit_frame2.png-1a988185c820132eb062ea4c1fd8abc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://particle_aura.png"
-dest_files=["res://.godot/imported/particle_aura.png-5c5117a8d244ade337d437c02c525c6e.ctex"]
+source_file="res://Assets/exit_frame2.png"
+dest_files=["res://.godot/imported/exit_frame2.png-1a988185c820132eb062ea4c1fd8abc1.ctex"]
 
 [params]
 
