@@ -18,8 +18,7 @@ func _ready():
 			erase_cell(0,cell)
 	for cell in get_used_cells(1):
 		var cell_id = get_cell_source_id(1,cell)
-		if cell_id == WALL_CELL_ID:
-			spawn_occluder(cell)
+		spawn_occluder(cell,cell_id)
 		get_cell_tile_data(1,cell).modulate = Color.DARK_GRAY
 
 func spawn_player(cell : Vector2i):
@@ -29,8 +28,10 @@ func spawn_player(cell : Vector2i):
 	player.current_cell = cell
 	add_child(player)
 
-func spawn_occluder(cell : Vector2i):
+func spawn_occluder(cell : Vector2i, cell_id : int):
 	var occluder : StaticBody2D = occluder_scene.instantiate()
 	occluder.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
+	occluder.get_node("Occluder").visible = cell_id == WALL_CELL_ID
+	occluder.collision_layer = 1 if cell_id == WALL_CELL_ID else 3
 	occluder.name = str(cell)
 	add_child(occluder)
