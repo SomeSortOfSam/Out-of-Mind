@@ -22,8 +22,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if _handle_inputs():
-		recaculate_line_of_sight()
 	if (!tween || !tween.is_running()):
 		if map.get_cell_source_id(2,current_cell) == -1:
 			move_in_direction(previous_direction)
@@ -34,6 +32,9 @@ func _process(_delta):
 		else:
 			void_count = clamp(void_count - .01, 0, MAX_VOID)
 		modulate = lerp(Color.WHITE,Color(1,1,1,0),void_count/MAX_VOID)
+	if _handle_inputs():
+		recaculate_line_of_sight()
+	
 
 func _handle_inputs() -> bool:
 	@warning_ignore(narrowing_conversion)
