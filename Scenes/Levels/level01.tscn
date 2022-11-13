@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://j8iclp5861qv"]
+[gd_scene load_steps=3 format=3 uid="uid://cmqf0t22n65yw"]
 
-[ext_resource type="PackedScene" uid="uid://cbktctutdnjti" path="res://Levels/levelBase.tscn" id="1_uqatm"]
-[ext_resource type="PackedScene" uid="uid://chyiryljlg2d8" path="res://Levels/level02.tscn" id="2_k3qqq"]
+[ext_resource type="PackedScene" uid="uid://dxifh7ag5yhl8" path="res://Scenes/Levels/levelBase.tscn" id="1_uqatm"]
+[ext_resource type="PackedScene" uid="uid://b1huk1fa74v12" path="res://Scenes/Levels/level02.tscn" id="2_k3qqq"]
 
 [node name="Level" instance=ExtResource("1_uqatm")]
 layer_0/tile_data = PackedInt32Array(-131073, 4, 0)

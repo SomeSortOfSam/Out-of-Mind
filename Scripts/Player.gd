@@ -1,32 +1,34 @@
 class_name Player
-extends Node2D
+extends Veiwer
 
-const WIN_TILE_ID := 3
-const GLASS_TILE_ID := 1
 const WALL_EXCEPTIONS := [-1,WIN_TILE_ID]
-const OCCLUDER_EXCEPTIONS := [GLASS_TILE_ID,WIN_TILE_ID]
 const MAX_VOID := 5
 
-@onready var raycast : RayCast2D = $RayCast2D
 @onready var light : PointLight2D = $PointLight2D
 
-var map : TileMap
 var current_cell : Vector2i
 var tween : Tween
 var previous_direction : Vector2i
 var in_sight_set : PackedVector2Array
+var out_of_sight_exceptions : PackedVector2Array
 var void_count := 0.0
 
+signal moved(new_cell)
 signal won
 signal lost
 signal saw_exit
 
+func _ready():
+	reset(current_cell,map)
+
 func _process(_delta):
 	if map && (do_void_check() || _handle_inputs()):
 		await tween.finished
+		emit_signal("moved",current_cell)
 		if map:
 			recaculate_line_of_sight()
 
+@warning_ignore(shadowed_variable, shadowed_variable)
 func reset(current_cell : Vector2i, map : TileMap):
 	in_sight_set = PackedVector2Array()
 	void_count = 0
@@ -34,10 +36,12 @@ func reset(current_cell : Vector2i, map : TileMap):
 	if tween:
 		tween.stop()
 	light.energy = 0
+	@warning_ignore(return_value_discarded)
 	create_tween().tween_property(light,"energy",1,.2)
 	self.current_cell = current_cell
 	self.map = map
 	tween = create_tween()
+	@warning_ignore(return_value_discarded)
 	tween.tween_property(self,\
 	"position",self.current_cell * map.tile_set.tile_size * 1.0 + map.tile_set.tile_size/2.0,.4)\
 	.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
@@ -91,24 +95,9 @@ func recaculate_line_of_sight():
 				emit_signal("saw_exit")
 			if cell_id not in OCCLUDER_EXCEPTIONS:
 				map.get_cell_tile_data(1,cell).modulate = map.on_color
-		elif Vector2(cell) in in_sight_set:
+		elif Vector2(cell) in in_sight_set && Vector2(cell) not in out_of_sight_exceptions:
 			if !destory_cell(cell):
 				break
-
-func get_is_visible(cell : Vector2i) -> bool:
-	for target_position in [to_local(cell * map.tile_set.tile_size + Vector2i.ONE * 4),
-	to_local(cell * map.tile_set.tile_size + map.tile_set.tile_size - Vector2i.ONE * 4),
-	to_local(cell * map.tile_set.tile_size + map.tile_set.tile_size * Vector2i.RIGHT + Vector2i(-1,1) * 4),
-	to_local(cell * map.tile_set.tile_size + map.tile_set.tile_size * Vector2i.DOWN + Vector2i(-1,1) * 4)]:
-		raycast.target_position = target_position
-		raycast.force_raycast_update()
-		if map.get_cell_source_id(1,cell) in OCCLUDER_EXCEPTIONS:
-			if !raycast.is_colliding():
-				return true
-		elif raycast.is_colliding():
-			if raycast.get_collider().name == str(cell):
-				return true
-	return false
 
 func destory_cell(cell : Vector2i) -> bool:
 	var cell_id = map.get_cell_source_id(1,cell)
@@ -125,10 +114,9 @@ func destory_cell(cell : Vector2i) -> bool:
 	return true
 
 func _on_won():
-	await get_tree().process_frame
 	map = null
 
 func _on_lost():
+	@warning_ignore(return_value_discarded)
 	create_tween().tween_property(light,"energy",0,1)
-	await get_tree().process_frame
 	map = null

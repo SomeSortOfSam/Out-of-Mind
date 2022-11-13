@@ -1,10 +1,12 @@
 extends TileMap
 
 const PLAYER_START_CELL_ID := 4
+const CAMERA_CELL_ID := 6
 const WALL_CELL_ID := 0
 
 @export var player_scene : PackedScene
 @export var occluder_scene : PackedScene
+@export var camera_scene : PackedScene
 @export var ping_scene : PackedScene
 @export var next_level : PackedScene
 @export var on_color : Color
@@ -12,8 +14,8 @@ const WALL_CELL_ID := 0
 @onready var restart_label : Label = $"CanvasLayer/Restart Text"
 @onready var camera : Camera2D = $Camera2D
 
-var camera_list := []
 var ping : GPUParticles2D
+var player : Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,13 +42,16 @@ func start_camera_change():
 	create_tween().tween_property(camera,"position",self.camera.position,1.5)
 	if camera != self.camera:
 		self.camera.queue_free()
+	camera.current = true
 
 func spawn_utility_objects():
 	for cell in get_used_cells(0):
-		var cell_id = get_cell_source_id(0,cell)
-		if cell_id == PLAYER_START_CELL_ID:
-			spawn_player(cell)
-			erase_cell(0,cell)
+		match get_cell_source_id(0,cell):
+			PLAYER_START_CELL_ID:
+				spawn_player(cell)
+			CAMERA_CELL_ID:
+				call_deferred("spawn_camera",cell)
+		erase_cell(0,cell)
 
 func spawn_wall_objects():
 	for cell in get_used_cells(1):
@@ -58,11 +63,12 @@ func spawn_wall_objects():
 			get_cell_tile_data(1,cell).modulate = Color.DARK_GRAY
 
 func spawn_player(cell : Vector2i):
-	var player : Player = get_node_or_null("../Player")
+	player = get_node_or_null("../Player")
 	if !player:
 		player = player_scene.instantiate()
 		$"..".call_deferred("add_child",player)
-		player.call_deferred("reset", cell, self)
+		player.current_cell = cell
+		player.map = self
 	else:
 		player.reset(cell, self)
 	@warning_ignore(return_value_discarded)
@@ -77,6 +83,25 @@ func spawn_occluder(cell : Vector2i):
 	occluder.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
 	occluder.name = str(cell)
 	add_child(occluder)
+
+func spawn_camera(cell : Vector2i):
+	@warning_ignore(shadowed_variable)
+	var camera : Camera = camera_scene.instantiate()
+	camera.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
+	var tile_data := get_cell_tile_data(0,cell)
+	if tile_data:
+		if tile_data.flip_h:
+			camera.scale.x = -1
+		if tile_data.flip_v:
+			camera.scale.y = -1
+		if tile_data.transpose:
+			camera.rotation = -PI/2
+	camera.map = self
+	camera.cell = cell
+	add_child(camera)
+	@warning_ignore(return_value_discarded)
+	camera.connect("turned_on",_on_camera_turned_on)
+	player.connect("moved",camera._on_player_moved)
 
 func spawn_ping(cell : Vector2i):
 	ping = ping_scene.instantiate()
@@ -102,3 +127,6 @@ func _on_player_lose():
 
 func _on_player_saw_exit():
 	ping.visible = false
+
+func _on_camera_turned_on(seen_tiles : PackedVector2Array):
+	player.out_of_sight_exceptions.append_array(seen_tiles)

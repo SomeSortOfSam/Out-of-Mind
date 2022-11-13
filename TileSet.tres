@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=32 format=3 uid="uid://cy63bdj1rjo8p"]
+[gd_resource type="TileSet" load_steps=34 format=3 uid="uid://cy63bdj1rjo8p"]
 
 [ext_resource type="Texture2D" uid="uid://5ocnncxkap7c" path="res://Assets/tiles_panel.png" id="1_4k86s"]
 [ext_resource type="Texture2D" uid="uid://ye6ck7lff8r2" path="res://Assets/glass_tiles.png" id="2_l8tw0"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://can4h8rgxdyyt" path="res://Assets/exit_frame7.png" id="10_wag31"]
 [ext_resource type="Texture2D" uid="uid://btuusv5yg1oqw" path="res://Assets/exit_frame8.png" id="11_w8bx8"]
 [ext_resource type="Texture2D" uid="uid://dli51rpbfc0w5" path="res://Assets/scorch.png" id="12_mkq8q"]
+[ext_resource type="Texture2D" uid="uid://f87alhg04v0r" path="res://Assets/particle_aura.png" id="13_fv1iy"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sxmu7"]
 
@@ -1787,6 +1788,12 @@ texture_region_size = Vector2i(64, 64)
 11:3/0/terrains_peering_bit/top_side = 3
 11:3/0/terrains_peering_bit/top_right_corner = 1
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2p1ya"]
+resource_name = "Camera"
+texture = ExtResource("13_fv1iy")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
 [resource]
 tile_size = Vector2i(64, 64)
 occlusion_layer_0/light_mask = 1
@@ -1806,3 +1813,4 @@ sources/2 = SubResource("TileSetAtlasSource_1fs8a")
 sources/3 = SubResource("TileSetAtlasSource_4cj4i")
 sources/4 = SubResource("TileSetAtlasSource_7q4f8")
 sources/5 = SubResource("TileSetAtlasSource_qc2qq")
+sources/6 = SubResource("TileSetAtlasSource_2p1ya")

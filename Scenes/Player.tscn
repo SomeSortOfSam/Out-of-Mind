@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://drn3be7qjuffg"]
+
+[ext_resource type="PackedScene" uid="uid://b3hs77u3ypaj4" path="res://Scenes/Veiwer.tscn" id="1_6hpu1"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_w4t0v"]
+[ext_resource type="Texture2D" uid="uid://28rotrm0kvcv" path="res://Assets/icon.svg" id="2_t6g50"]
+
+[sub_resource type="Gradient" id="Gradient_crbh0"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qloy7"]
+gradient = SubResource("Gradient_crbh0")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Player" instance=ExtResource("1_6hpu1")]
+top_level = true
+script = ExtResource("1_w4t0v")
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="1"]
+blend_mode = 2
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = SubResource("GradientTexture2D_qloy7")
+texture_scale = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
+light_mask = 0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_t6g50")
+
+[connection signal="lost" from="." to="." method="_on_lost" flags=3]
+[connection signal="won" from="." to="." method="_on_won" flags=3]

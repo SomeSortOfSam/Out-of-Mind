@@ -1,11 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://cbktctutdnjti"]
+[gd_scene load_steps=15 format=3 uid="uid://dxifh7ag5yhl8"]
 
 [ext_resource type="TileSet" uid="uid://cy63bdj1rjo8p" path="res://TileSet.tres" id="1_yhqqe"]
-[ext_resource type="Script" path="res://Level.gd" id="2_ujwsk"]
-[ext_resource type="PackedScene" uid="uid://b2rog366pp2em" path="res://Player.tscn" id="3_47q5g"]
-[ext_resource type="PackedScene" uid="uid://p8fsxk1rvpuy" path="res://Occluder.tscn" id="4_6ubc7"]
-[ext_resource type="PackedScene" uid="uid://ckln6dxvu4yrt" path="res://ExitPing.tscn" id="5_nrm70"]
+[ext_resource type="Script" path="res://Scripts/Level.gd" id="2_ujwsk"]
+[ext_resource type="PackedScene" uid="uid://drn3be7qjuffg" path="res://Scenes/Player.tscn" id="3_j3ixv"]
+[ext_resource type="PackedScene" uid="uid://cod7w1av0h7vw" path="res://Scenes/Collider.tscn" id="4_2alwy"]
+[ext_resource type="PackedScene" uid="uid://dfmyar2v2rflm" path="res://Scenes/Camera.tscn" id="5_hiags"]
 [ext_resource type="Texture2D" uid="uid://b8xcuq8emrc2b" path="res://Assets/ParticleFade.png" id="6_4nu1o"]
+[ext_resource type="PackedScene" uid="uid://ckln6dxvu4yrt" path="res://Scenes/ExitPing.tscn" id="6_5jb7e"]
 
 [sub_resource type="Gradient" id="Gradient_drr1w"]
 offsets = PackedFloat32Array(0, 0.538071, 1)
@@ -67,14 +68,12 @@ layer_2/y_sort_origin = 0
 layer_2/z_index = -1
 layer_2/tile_data = PackedInt32Array()
 script = ExtResource("2_ujwsk")
-player_scene = ExtResource("3_47q5g")
-occluder_scene = ExtResource("4_6ubc7")
-ping_scene = ExtResource("5_nrm70")
-on_color = Color(0.819608, 0.376471, 0.376471, 1)
+player_scene = ExtResource("3_j3ixv")
+occluder_scene = ExtResource("4_2alwy")
+camera_scene = ExtResource("5_hiags")
+ping_scene = ExtResource("6_5jb7e")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-76, 186)
-current = true
 
 [node name="VoidParticles" type="GPUParticles2D" parent="Camera2D"]
 light_mask = 0
@@ -99,6 +98,7 @@ text = "R to Restart"
 label_settings = SubResource("LabelSettings_1erum")
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -109,3 +109,4 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("CompressedTexture2D_2dwps")
 stretch_mode = 1
+metadata/_edit_lock_ = true
