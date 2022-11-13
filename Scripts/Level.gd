@@ -82,7 +82,6 @@ func spawn_wall_objects():
 				erase_cell(Veiwer.WALL_LAYER,cell)
 			CAMERA_CELL_ID:
 				call_deferred("spawn_camera",cell)
-				erase_cell(Veiwer.WALL_LAYER,cell)
 			Player.WIN_TILE_ID:
 				spawn_ping(cell)
 			var cell_id:
@@ -118,6 +117,7 @@ func spawn_camera(cell : Vector2i):
 	@warning_ignore(shadowed_variable)
 	var camera : Camera = camera_scene.instantiate()
 	camera.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
+	camera.name = str(cell)
 	var tile_data := get_cell_tile_data(0,cell)
 	if tile_data:
 		if tile_data.flip_h:
