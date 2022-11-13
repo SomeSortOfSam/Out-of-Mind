@@ -8,6 +8,7 @@ const WALL_CELL_ID := 0
 @export var occluder_scene : PackedScene
 @export var camera_scene : PackedScene
 @export var ping_scene : PackedScene
+@export var win_scene : PackedScene
 @export var next_level : PackedScene
 @export var on_color : Color
 
@@ -136,8 +137,11 @@ func spawn_camera(cell : Vector2i):
 
 func spawn_ping(cell : Vector2i):
 	ping = ping_scene.instantiate()
+	var win = win_scene.instantiate()
 	ping.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
+	win.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
 	add_child(ping)
+	add_child(win)
 
 func _on_player_win():
 	await (await fade(false)).finished

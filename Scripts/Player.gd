@@ -52,7 +52,8 @@ func reset(_current_cell : Vector2i, _map : TileMap):
 	.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	AudioServer.set_bus_mute(1,true)
 	await tween.finished
-	intro()
+	await intro()
+	recaculate_line_of_sight()
 
 func intro():
 	sprite.animation = "enter"
