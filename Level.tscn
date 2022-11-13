@@ -8,7 +8,7 @@
 
 [sub_resource type="Gradient" id="Gradient_drr1w"]
 offsets = PackedFloat32Array(0, 0.538071, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.380392, 0.380392, 0.380392, 0.376471, 1, 1, 1, 0)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.054902, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_xf1a8"]
 gradient = SubResource("Gradient_drr1w")
@@ -28,10 +28,12 @@ particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 angular_velocity_min = -90.0
 angular_velocity_max = 90.0
-orbit_velocity_min = -0.05
-orbit_velocity_max = 0.05
-radial_accel_min = -100.0
-radial_accel_max = -100.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+radial_accel_min = -300.0
+radial_accel_max = -200.0
+damping_min = 20.0
+damping_max = 20.0
 angle_min = -720.0
 angle_max = 720.0
 scale_max = 3.0
@@ -49,6 +51,7 @@ occluder_scene = ExtResource("4_nt24j")
 current = true
 
 [node name="VoidParticles" type="GPUParticles2D" parent="Camera2D"]
+light_mask = 0
 z_index = -5
 amount = 20
 lifetime = 2.0
