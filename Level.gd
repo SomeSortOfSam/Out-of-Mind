@@ -32,7 +32,6 @@ func spawn_player(cell : Vector2i):
 func spawn_occluder(cell : Vector2i, cell_id : int):
 	var occluder : StaticBody2D = occluder_scene.instantiate()
 	occluder.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
-	occluder.get_node("Occluder").visible = cell_id == WALL_CELL_ID
 	occluder.collision_layer = 1 if cell_id == WALL_CELL_ID else 3
 	occluder.name = str(cell)
 	add_child(occluder)
