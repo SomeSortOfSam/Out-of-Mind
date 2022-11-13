@@ -17,30 +17,31 @@ var in_sight_set : PackedVector2Array
 var void_count := 0.0
 
 signal won
-signal lose
+signal lost
+signal saw_exit
 
-func _ready():
-	recaculate_line_of_sight()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	do_void_check()
-	if _handle_inputs():
+	if do_void_check() && _handle_inputs():
+		await tween.finished
 		recaculate_line_of_sight()
 
-func do_void_check():
+func do_void_check() -> bool:
+	if void_count > MAX_VOID:
+		return false
 	modulate = lerp(Color.WHITE,Color(1,1,1,0),void_count/MAX_VOID)
-	if (!tween || !tween.is_running()):
-		if map.get_cell_source_id(2,current_cell) == -1:
-			var next_cell = current_cell + previous_direction
-			var next_cell_id = map.get_cell_source_id(1,next_cell)
-			move_in_direction(previous_direction if next_cell_id in WALL_EXCEPTIONS else -previous_direction )
-			void_count += 1
-			if void_count > MAX_VOID:
-				emit_signal("lose")
-				queue_free()
-		else:
-			void_count = clamp(void_count - .1, 0, MAX_VOID)
+	var current_cell_id = map.get_cell_source_id(2,current_cell)
+	if current_cell_id != -1:
+		void_count = clamp(void_count - .1, 0, MAX_VOID)
+	elif (!tween || !tween.is_running()):
+		var next_cell = current_cell + previous_direction
+		var next_cell_id = map.get_cell_source_id(1,next_cell)
+		move_in_direction(previous_direction if next_cell_id in WALL_EXCEPTIONS else -previous_direction )
+		void_count += 1
+		if void_count > MAX_VOID:
+			@warning_ignore(return_value_discarded)
+			emit_signal("lost")
+			queue_free()
+	return true
 
 func _handle_inputs() -> bool:
 	@warning_ignore(narrowing_conversion)
@@ -64,12 +65,16 @@ func move_in_direction(direction : Vector2i):
 func recaculate_line_of_sight():
 	for cell in map.get_used_cells(1):
 		if get_is_visible(cell):
+			@warning_ignore(return_value_discarded)
 			in_sight_set.append(cell)
-			if map.get_cell_source_id(1,cell) not in OCCLUDER_EXCEPTIONS:
+			var cell_id = map.get_cell_source_id(1,cell)
+			if cell_id == WIN_TILE_ID:
+				@warning_ignore(return_value_discarded)
+				emit_signal("saw_exit")
+			if cell_id not in OCCLUDER_EXCEPTIONS:
 				map.get_cell_tile_data(1,cell).modulate = map.on_color
 		elif Vector2(cell) in in_sight_set:
 			destory_cell(cell)
-		await get_tree().physics_frame
 
 func get_is_visible(cell : Vector2i) -> bool:
 	for target_position in [to_local(cell * map.tile_set.tile_size + Vector2i.ONE * 4),
@@ -88,7 +93,8 @@ func get_is_visible(cell : Vector2i) -> bool:
 
 func destory_cell(cell : Vector2i):
 	if map.get_cell_source_id(1,cell) == WIN_TILE_ID:
-		emit_signal("lose")
+		@warning_ignore(return_value_discarded)
+		emit_signal("lost")
 	map.erase_cell(1,cell)
 	var node = map.get_node_or_null(str(cell))
 	if node:

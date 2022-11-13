@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbktctutdnjti"]
+[gd_scene load_steps=14 format=3 uid="uid://cbktctutdnjti"]
 
 [ext_resource type="TileSet" uid="uid://cy63bdj1rjo8p" path="res://TileSet.tres" id="1_yhqqe"]
 [ext_resource type="Script" path="res://Level.gd" id="2_ujwsk"]
@@ -41,8 +41,11 @@ scale_max = 3.0
 scale_curve = SubResource("CurveTexture_8dvyv")
 color_ramp = SubResource("GradientTexture1D_xf1a8")
 
+[sub_resource type="LabelSettings" id="LabelSettings_1erum"]
+font_size = 200
+font_color = Color(0.184314, 0.184314, 0.184314, 0.494118)
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2dwps"]
-load_path = "res://.godot/imported/void_spread.png-d51c5840822344b9c8aeab7187a5ac7f.ctex"
 
 [node name="Level" type="TileMap"]
 position = Vector2(0, 14)
@@ -80,9 +83,22 @@ amount = 20
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_gl2by")
 texture = ExtResource("6_4nu1o")
+metadata/_edit_lock_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
+
+[node name="Restart Text" type="Label" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "R to Restart"
+label_settings = SubResource("LabelSettings_1erum")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 15
