@@ -40,6 +40,7 @@ func start_camera_change():
 		camera = self.camera
 	@warning_ignore(return_value_discarded)
 	create_tween().tween_property(camera,"position",self.camera.position,1.5)
+	create_tween().tween_property(camera,"zoom",self.camera.zoom,1.5)
 	if camera != self.camera:
 		self.camera.queue_free()
 	camera.current = true

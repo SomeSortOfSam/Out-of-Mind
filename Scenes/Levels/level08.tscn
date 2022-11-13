@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3f5dcq0vd4fo"]
+
+[ext_resource type="PackedScene" uid="uid://dxifh7ag5yhl8" path="res://Scenes/Levels/levelBase.tscn" id="1_yhepw"]
+[ext_resource type="PackedScene" uid="uid://dn5vpyyivxdxg" path="res://Scenes/Levels/level09.tscn" id="2_7gjkn"]
+
+[node name="Level" instance=ExtResource("1_yhepw")]
+layer_0/tile_data = PackedInt32Array(65534, 4, 0)
+layer_1/tile_data = PackedInt32Array(65535, 65536, 3, 0, 131072, 3, 1, 131072, 3, 2, 131072, 3, 3, 131072, 3, 196607, 0, 3, 131074, 0, 3, 131077, 65536, 3, 131078, 196608, 3, 4, 196608, 3, 131071, 1, 1, 131075, 131073, 3, 131076, 131073, 3, 65542, 3, 0)
+layer_2/tile_data = PackedInt32Array(-1, 196610, 3, -2, 65538, 0, 65534, 2, 1, 131070, 65538, 1, 196606, 2, 1, 131071, 131074, 3, 262142, 65538, 2, 262143, 131074, 3, 196608, 327682, 3, 131072, 524290, 1, 65536, 327682, 0, 65537, 393218, 0, 65538, 131074, 3, 131073, 720898, 2, 196609, 393218, 3, 196610, 131074, 3, 196611, 327682, 3, 131075, 524290, 1, 131076, 720898, 2, 196612, 393218, 3, 196613, 131074, 3, 196614, 196610, 3, 65539, 327682, 0, 65540, 393218, 0, 65541, 327682, 3, 65542, 720898, 3, 5, 524290, 0, 6, 720898, 0)
+next_level = ExtResource("2_7gjkn")
+
+[node name="Camera2D" parent="." index="0"]
+position = Vector2(162, 95)
+zoom = Vector2(1.5, 1.5)
