@@ -13,9 +13,11 @@ func turn_on():
 	light.enabled = true
 	sound.play()
 	var seen_tiles := PackedVector2Array()
-	for cell in map.get_used_cells(1):
-		if get_is_visible(cell):
-			seen_tiles.append(cell)
+	for tile in map.get_used_cells(1):
+		if get_is_visible(tile):
+			@warning_ignore(return_value_discarded)
+			seen_tiles.append(tile)
+	@warning_ignore(return_value_discarded)
 	emit_signal("turned_on",seen_tiles)
 
 func _on_player_moved(new_cell : Vector2i):

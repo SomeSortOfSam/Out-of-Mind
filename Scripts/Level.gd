@@ -17,40 +17,47 @@ const WALL_CELL_ID := 0
 var ping : GPUParticles2D
 var player : Player
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	start_camera_change()
 	spawn_wall_objects()
-	await fade_in()
+	await fade(true)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_restart"):
 		@warning_ignore(return_value_discarded)
 		get_tree().reload_current_scene()
 
-func fade_in():
+func fade(come_in : bool) -> Tween:
 	var cells := get_used_cells(Player.FLOOR_LAYER)
 	for cell in get_used_cells(Player.WALL_LAYER):
 		if cell not in cells:
 			cells.append(cell)
+	var tween : Tween
 	while cells.size() > 0:
 		var index = randi_range(0,cells.size() - 1)
 		var cell = cells[index]
 		cells.remove_at(index)
 		if get_cell_source_id(Player.FLOOR_LAYER,cell) != -1:
-			fade_cell_in(Player.FLOOR_LAYER,cell)
+			tween = fade_cell(come_in, Player.FLOOR_LAYER,cell)
 		if get_cell_source_id(Player.WALL_LAYER,cell) != -1:
-			fade_cell_in(Player.WALL_LAYER,cell)
+			tween = fade_cell(come_in, Player.WALL_LAYER,cell)
 		await get_tree().process_frame
+	return tween
 
-func fade_cell_in(layer : int, cell : Vector2i):
+func fade_cell(come_in: bool, layer : int, cell : Vector2i) -> Tween:
 	var cell_data = get_cell_tile_data(layer,cell)
 	var cell_id = get_cell_source_id(layer,cell)
+	var up_color = on_color if cell_id not in Veiwer.OCCLUDER_EXCEPTIONS else Color.WHITE
+	var down_color = Color(0,0,0,0)
 	if cell_data:
-		cell_data.modulate = Color(0,0,0,0)
-		create_tween().tween_property(cell_data,"modulate",\
-		on_color if cell_id not in Veiwer.OCCLUDER_EXCEPTIONS else Color.WHITE\
-		,1.5)
+		cell_data.modulate = down_color if come_in else up_color
+		var tween = create_tween()
+		@warning_ignore(return_value_discarded)
+		tween.tween_property(cell_data,"modulate",up_color if come_in else down_color,1.5)
+		return tween
+	return null
 
 func start_camera_change():
 	@warning_ignore(shadowed_variable)
@@ -133,10 +140,7 @@ func spawn_ping(cell : Vector2i):
 	add_child(ping)
 
 func _on_player_win():
-	var tween = create_tween()
-	@warning_ignore(return_value_discarded)
-	tween.tween_property(self,"modulate",Color(1,1,1,0),1).set_ease(Tween.EASE_OUT)
-	await tween.finished
+	await (await fade(false)).finished
 	@warning_ignore(return_value_discarded)
 	get_tree().change_scene_to_packed(next_level)
 
@@ -144,8 +148,7 @@ func _on_player_lose():
 	ping.visible = false
 	@warning_ignore(return_value_discarded)
 	create_tween().tween_property(restart_label,"modulate", Color.WHITE,3)
-	@warning_ignore(return_value_discarded)
-	create_tween().tween_property(self,"modulate",Color(1,1,1,0),1.5).set_ease(Tween.EASE_OUT)
+	await fade(false)
 
 func _on_player_saw_exit():
 	ping.visible = false

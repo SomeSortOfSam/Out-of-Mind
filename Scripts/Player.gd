@@ -91,6 +91,7 @@ func _handle_inputs() -> bool:
 func move_in_direction(direction : Vector2i):
 	current_cell += direction
 	tween = create_tween()
+	@warning_ignore(return_value_discarded)
 	tween.set_parallel(true)
 	var _rotor = tween.tween_property(sprite,"rotation",Vector2(direction).angle() - PI/2,.1)
 	var _tween = tween.tween_property(self,"position",position + direction * map.tile_set.tile_size * 1.0,.2)
