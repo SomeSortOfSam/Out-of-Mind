@@ -23,10 +23,6 @@ signal won
 signal lost
 signal saw_exit
 
-func intro():
-	sprite.animation = "enter"
-	await sprite.animation_finished
-	sprite.animation = "default"
 func _ready():
 	reset(current_cell,map)
 
@@ -37,7 +33,6 @@ func _process(_delta):
 		emit_signal("moved",current_cell)
 		if map:
 			recaculate_line_of_sight()
-
 
 func reset(_current_cell : Vector2i, _map : TileMap):
 	in_sight_set = PackedVector2Array()
@@ -58,7 +53,11 @@ func reset(_current_cell : Vector2i, _map : TileMap):
 	AudioServer.set_bus_mute(1,true)
 	await tween.finished
 	intro()
-	
+
+func intro():
+	sprite.animation = "enter"
+	await sprite.animation_finished
+	sprite.animation = "default"
 
 func do_void_check() -> bool:
 	if void_count > MAX_VOID:

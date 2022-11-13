@@ -66,6 +66,7 @@ player_scene = ExtResource("3_j3ixv")
 occluder_scene = ExtResource("4_2alwy")
 camera_scene = ExtResource("5_hiags")
 ping_scene = ExtResource("6_5jb7e")
+on_color = Color(0.690196, 0, 0.0117647, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
