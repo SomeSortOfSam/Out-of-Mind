@@ -18,7 +18,6 @@ const WALL_CELL_ID := 0
 var ping : GPUParticles2D
 var player : Player
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	start_camera_change()

@@ -129,6 +129,8 @@ func destory_cell(cell : Vector2i) -> bool:
 		AudioServer.set_bus_mute(1,false)
 	map.set_cells_terrain_connect(FLOOR_LAYER,[cell],0,FLOOR_TERRAIN_ID)
 	map.force_update(FLOOR_LAYER)
+	for surrounding_cell in map.get_used_cells(FLOOR_LAYER):
+		map.get_cell_tile_data(FLOOR_LAYER,surrounding_cell).modulate = map.on_color
 	return true
 
 func _on_won():
