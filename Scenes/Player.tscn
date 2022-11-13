@@ -1,9 +1,10 @@
-[gd_scene load_steps=47 format=3 uid="uid://drn3be7qjuffg"]
+[gd_scene load_steps=48 format=3 uid="uid://drn3be7qjuffg"]
 
 [ext_resource type="PackedScene" uid="uid://b3hs77u3ypaj4" path="res://Scenes/Veiwer.tscn" id="1_6hpu1"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_w4t0v"]
 [ext_resource type="Texture2D" uid="uid://df2ni7yyqlyme" path="res://Assets/proto_player-sheet.png" id="3_u2xm5"]
 [ext_resource type="Texture2D" uid="uid://iiabbkkob5km" path="res://Assets/player_transition_sheet.png" id="4_dfnak"]
+[ext_resource type="AudioStream" uid="uid://t8fi4jglwxr4" path="res://Win.wav" id="5_hmwy6"]
 
 [sub_resource type="Gradient" id="Gradient_crbh0"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -201,9 +202,13 @@ texture_scale = 50.0
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="." index="2"]
 light_mask = 2
 position = Vector2(0, 16)
+z_index = 1
 frames = SubResource("SpriteFrames_6ncfy")
 animation = &"enter"
 playing = true
+
+[node name="WonSound" type="AudioStreamPlayer2D" parent="." index="3"]
+stream = ExtResource("5_hmwy6")
 
 [connection signal="lost" from="." to="." method="_on_lost" flags=3]
 [connection signal="won" from="." to="." method="_on_won" flags=3]

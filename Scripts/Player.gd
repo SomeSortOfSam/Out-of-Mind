@@ -9,6 +9,7 @@ const MAX_VOID := 5
 
 @onready var light : PointLight2D = $PointLight2D
 @onready var sprite : AnimatedSprite2D = $AnimatedSprite2d
+@onready var won_sound : AudioStreamPlayer2D = $WonSound
 
 var current_cell : Vector2i
 var tween : Tween
@@ -131,7 +132,7 @@ func destory_cell(cell : Vector2i) -> bool:
 
 func _on_won():
 	sprite.animation = "exit"
-	await get_tree().process_frame
+	won_sound.play()
 	map = null
 
 func _on_lost():
