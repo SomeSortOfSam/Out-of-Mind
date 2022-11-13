@@ -1,7 +1,10 @@
 class_name Player
 extends Veiwer
 
-const WALL_EXCEPTIONS := [-1,WIN_TILE_ID]
+const WALL_EXCEPTIONS := [-1,WIN_TILE_ID,Veiwer.SCORCH_TILE_ID]
+const FLOOR_LAYER := 0
+const FLOOR_TERRAIN_ID := 2
+const SCORCH_TERRAIN_ID := 3
 const MAX_VOID := 5
 
 @onready var light : PointLight2D = $PointLight2D
@@ -24,12 +27,13 @@ func _ready():
 func _process(_delta):
 	if map && (do_void_check() || _handle_inputs()):
 		await tween.finished
+		@warning_ignore(return_value_discarded)
 		emit_signal("moved",current_cell)
 		if map:
 			recaculate_line_of_sight()
 
-@warning_ignore(shadowed_variable, shadowed_variable)
-func reset(current_cell : Vector2i, map : TileMap):
+
+func reset(_current_cell : Vector2i, _map : TileMap):
 	in_sight_set = PackedVector2Array()
 	void_count = 0
 	previous_direction = Vector2i.ZERO
@@ -38,8 +42,8 @@ func reset(current_cell : Vector2i, map : TileMap):
 	light.energy = 0
 	@warning_ignore(return_value_discarded)
 	create_tween().tween_property(light,"energy",1,.2)
-	self.current_cell = current_cell
-	self.map = map
+	current_cell = _current_cell
+	map = _map
 	tween = create_tween()
 	@warning_ignore(return_value_discarded)
 	tween.tween_property(self,\
@@ -50,12 +54,12 @@ func do_void_check() -> bool:
 	if void_count > MAX_VOID:
 		return true
 	modulate = lerp(Color.WHITE,Color(1,1,1,0),void_count/MAX_VOID)
-	var current_cell_id = map.get_cell_source_id(2,current_cell)
+	var current_cell_id = map.get_cell_source_id(FLOOR_LAYER,current_cell)
 	if current_cell_id != -1:
 		void_count = clamp(void_count - .1, 0, MAX_VOID)
 	elif (!tween || !tween.is_running()):
 		var next_cell = current_cell + previous_direction
-		var next_cell_id = map.get_cell_source_id(1,next_cell)
+		var next_cell_id = map.get_cell_source_id(WALL_LAYER,next_cell)
 		move_in_direction(previous_direction if next_cell_id in WALL_EXCEPTIONS else -previous_direction )
 		void_count += 1
 		if void_count > MAX_VOID:
@@ -70,7 +74,7 @@ func _handle_inputs() -> bool:
 	if (!tween || !tween.is_running()) && \
 		input != Vector2i.ZERO && \
 		(input.x == 0) != (input.y == 0) && \
-		map.get_cell_source_id(1,current_cell + input) in WALL_EXCEPTIONS:
+		map.get_cell_source_id(WALL_LAYER,current_cell + input) in WALL_EXCEPTIONS:
 		move_in_direction(input)
 		return true
 	return false
@@ -80,7 +84,7 @@ func move_in_direction(direction : Vector2i):
 	tween = create_tween()
 	var _tween = tween.tween_property(self,"position",position + direction * map.tile_set.tile_size * 1.0,.2)
 	previous_direction = direction
-	if map.get_cell_source_id(1,current_cell) == WIN_TILE_ID:
+	if map.get_cell_source_id(WALL_LAYER,current_cell) == WIN_TILE_ID:
 		await tween.finished
 		var _signal = emit_signal("won")
 
@@ -94,14 +98,14 @@ func recaculate_line_of_sight():
 				@warning_ignore(return_value_discarded)
 				emit_signal("saw_exit")
 			if cell_id not in OCCLUDER_EXCEPTIONS:
-				map.get_cell_tile_data(1,cell).modulate = map.on_color
+				map.get_cell_tile_data(WALL_LAYER,cell).modulate = map.on_color
 		elif Vector2(cell) in in_sight_set && Vector2(cell) not in out_of_sight_exceptions:
 			if !destory_cell(cell):
 				break
 
 func destory_cell(cell : Vector2i) -> bool:
 	var cell_id = map.get_cell_source_id(1,cell)
-	map.erase_cell(1,cell)
+	map.erase_cell(WALL_LAYER,cell)
 	if cell_id == WIN_TILE_ID:
 		@warning_ignore(return_value_discarded)
 		emit_signal("lost")
@@ -109,8 +113,8 @@ func destory_cell(cell : Vector2i) -> bool:
 	var node = map.get_node_or_null(str(cell))
 	if node:
 		node.queue_free()
-	map.set_cells_terrain_connect(2,[cell],0,2)
-	map.force_update(2)
+	map.set_cells_terrain_connect(FLOOR_LAYER,[cell],0,FLOOR_TERRAIN_ID)
+	map.force_update(FLOOR_LAYER)
 	return true
 
 func _on_won():
