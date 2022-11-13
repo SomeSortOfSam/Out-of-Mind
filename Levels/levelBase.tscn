@@ -42,7 +42,7 @@ scale_curve = SubResource("CurveTexture_8dvyv")
 color_ramp = SubResource("GradientTexture1D_xf1a8")
 
 [sub_resource type="LabelSettings" id="LabelSettings_1erum"]
-font_size = 200
+font_size = 100
 font_color = Color(0.184314, 0.184314, 0.184314, 0.494118)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2dwps"]

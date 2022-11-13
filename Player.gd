@@ -9,6 +9,7 @@ const MAX_VOID := 5
 
 @onready var raycast : RayCast2D = $RayCast2D
 @onready var light : PointLight2D = $PointLight2D
+@onready var sprite : AnimatedSprite2D = $AnimatedSprite2d
 
 var map : TileMap
 var current_cell : Vector2i
@@ -20,6 +21,11 @@ var void_count := 0.0
 signal won
 signal lost
 signal saw_exit
+
+func intro():
+	sprite.animation = "enter"
+	await sprite.animation_finished
+	sprite.animation = "default"
 
 func _process(_delta):
 	if map && (do_void_check() || _handle_inputs()):
@@ -41,6 +47,8 @@ func reset(current_cell : Vector2i, map : TileMap):
 	tween.tween_property(self,\
 	"position",self.current_cell * map.tile_set.tile_size * 1.0 + map.tile_set.tile_size/2.0,.4)\
 	.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	await tween.finished
+	intro()
 
 func do_void_check() -> bool:
 	if void_count > MAX_VOID:
@@ -74,6 +82,8 @@ func _handle_inputs() -> bool:
 func move_in_direction(direction : Vector2i):
 	current_cell += direction
 	tween = create_tween()
+	tween.set_parallel(true)
+	var _rotor = tween.tween_property(sprite,"rotation",Vector2(direction).angle() - PI/2,.1)
 	var _tween = tween.tween_property(self,"position",position + direction * map.tile_set.tile_size * 1.0,.2)
 	previous_direction = direction
 	if map.get_cell_source_id(1,current_cell) == WIN_TILE_ID:
@@ -125,6 +135,7 @@ func destory_cell(cell : Vector2i) -> bool:
 	return true
 
 func _on_won():
+	sprite.animation = "exit"
 	await get_tree().process_frame
 	map = null
 

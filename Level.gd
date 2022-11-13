@@ -101,4 +101,5 @@ func _on_player_lose():
 	create_tween().tween_property(self,"modulate",Color(1,1,1,0),1.5).set_ease(Tween.EASE_OUT)
 
 func _on_player_saw_exit():
-	ping.visible = false
+	#ping.visible = false
+	pass

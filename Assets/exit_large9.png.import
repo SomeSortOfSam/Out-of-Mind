@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://deekwd03c42ei"
-path="res://.godot/imported/exit_animated.png-e44056b4513a0806fed9377631182a2d.ctex"
+uid="uid://cxq8lo1p7bpno"
+path="res://.godot/imported/exit_large9.png-2297d527cebc0ae196755cbeef1229a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/exit_animated.png"
-dest_files=["res://.godot/imported/exit_animated.png-e44056b4513a0806fed9377631182a2d.ctex"]
+source_file="res://Assets/exit_large9.png"
+dest_files=["res://.godot/imported/exit_large9.png-2297d527cebc0ae196755cbeef1229a7.ctex"]
 
 [params]
 
@@ -25,7 +25,7 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
