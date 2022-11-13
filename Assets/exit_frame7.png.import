@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u0smi50of1sx"
-path="res://.godot/imported/void_spread.png-fe5e715aadc38c577b51075462e5de5f.ctex"
+uid="uid://can4h8rgxdyyt"
+path="res://.godot/imported/exit_frame7.png-84f507e9464932b13dd66a9672bcc426.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://void_spread.png"
-dest_files=["res://.godot/imported/void_spread.png-fe5e715aadc38c577b51075462e5de5f.ctex"]
+source_file="res://Assets/exit_frame7.png"
+dest_files=["res://.godot/imported/exit_frame7.png-84f507e9464932b13dd66a9672bcc426.ctex"]
 
 [params]
 

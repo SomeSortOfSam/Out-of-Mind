@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4l7hxiywjdu6"
-path="res://.godot/imported/tiles_gradient_checker.png-609dac9fca9ef40c8a1f473b5ff7464b.ctex"
+uid="uid://dli51rpbfc0w5"
+path="res://.godot/imported/scorch.png-aac2f94049e889d492608e7c2c2273b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles_gradient_checker.png"
-dest_files=["res://.godot/imported/tiles_gradient_checker.png-609dac9fca9ef40c8a1f473b5ff7464b.ctex"]
+source_file="res://Assets/scorch.png"
+dest_files=["res://.godot/imported/scorch.png-aac2f94049e889d492608e7c2c2273b7.ctex"]
 
 [params]
 

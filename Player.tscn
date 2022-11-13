@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8n2r5xk4334"]
+[gd_scene load_steps=5 format=3 uid="uid://b2rog366pp2em"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_7na2c"]
-[ext_resource type="Texture2D" uid="uid://28rotrm0kvcv" path="res://icon.svg" id="1_emui3"]
+[ext_resource type="Texture2D" uid="uid://28rotrm0kvcv" path="res://Assets/icon.svg" id="2_4ixbu"]
 
 [sub_resource type="Gradient" id="Gradient_vyyin"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -18,7 +18,7 @@ script = ExtResource("1_7na2c")
 light_mask = 2
 position = Vector2(0, 16)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_emui3")
+texture = ExtResource("2_4ixbu")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, 16)

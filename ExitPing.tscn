@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ckln6dxvu4yrt"]
 
-[ext_resource type="Texture2D" uid="uid://f87alhg04v0r" path="res://particle_aura.png" id="1_c14e4"]
+[ext_resource type="Texture2D" uid="uid://f87alhg04v0r" path="res://Assets/particle_aura.png" id="1_kq5i8"]
 
 [sub_resource type="Gradient" id="Gradient_njx7w"]
 offsets = PackedFloat32Array(0.781726, 1)
@@ -39,4 +39,4 @@ z_index = 5
 amount = 3
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_ch5j0")
-texture = ExtResource("1_c14e4")
+texture = ExtResource("1_kq5i8")

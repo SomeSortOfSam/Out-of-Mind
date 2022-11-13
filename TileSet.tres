@@ -1,9 +1,17 @@
-[gd_resource type="TileSet" load_steps=25 format=3 uid="uid://dugjqny2wd38q"]
+[gd_resource type="TileSet" load_steps=32 format=3 uid="uid://cy63bdj1rjo8p"]
 
-[ext_resource type="Texture2D" uid="uid://5ocnncxkap7c" path="res://tiles_panel.png" id="1_q0dm7"]
-[ext_resource type="Texture2D" uid="uid://ye6ck7lff8r2" path="res://glass_tiles.png" id="2_lntwd"]
-[ext_resource type="Texture2D" uid="uid://c4l7hxiywjdu6" path="res://tiles_gradient_checker.png" id="3_tlsve"]
-[ext_resource type="Texture2D" uid="uid://dli51rpbfc0w5" path="res://scorch.png" id="4_sk2fw"]
+[ext_resource type="Texture2D" uid="uid://5ocnncxkap7c" path="res://Assets/tiles_panel.png" id="1_4k86s"]
+[ext_resource type="Texture2D" uid="uid://ye6ck7lff8r2" path="res://Assets/glass_tiles.png" id="2_l8tw0"]
+[ext_resource type="Texture2D" uid="uid://c4l7hxiywjdu6" path="res://Assets/tiles_gradient_checker.png" id="3_e8ihg"]
+[ext_resource type="Texture2D" uid="uid://cu5i62m6pjeks" path="res://Assets/exit_frame1.png" id="4_xl1yx"]
+[ext_resource type="Texture2D" uid="uid://bjtjqnovp5v5k" path="res://Assets/exit_frame2.png" id="5_16jth"]
+[ext_resource type="Texture2D" uid="uid://bq46liygpnukh" path="res://Assets/exit_frame3.png" id="6_j5w3i"]
+[ext_resource type="Texture2D" uid="uid://cnp8of2ljpvif" path="res://Assets/exit_frame4.png" id="7_ew1in"]
+[ext_resource type="Texture2D" uid="uid://ds8k1ccl2mey4" path="res://Assets/exit_frame5.png" id="8_iu6ew"]
+[ext_resource type="Texture2D" uid="uid://bqkvocnft8oq6" path="res://Assets/exit_frame6.png" id="9_8rbkf"]
+[ext_resource type="Texture2D" uid="uid://can4h8rgxdyyt" path="res://Assets/exit_frame7.png" id="10_wag31"]
+[ext_resource type="Texture2D" uid="uid://btuusv5yg1oqw" path="res://Assets/exit_frame8.png" id="11_w8bx8"]
+[ext_resource type="Texture2D" uid="uid://dli51rpbfc0w5" path="res://Assets/scorch.png" id="12_mkq8q"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sxmu7"]
 
@@ -33,7 +41,7 @@ polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3qkfa"]
 resource_name = "Wall"
-texture = ExtResource("1_q0dm7")
+texture = ExtResource("1_4k86s")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/modulate = Color(0.819608, 0.376471, 0.376471, 1)
@@ -464,7 +472,7 @@ texture_region_size = Vector2i(64, 64)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pea0x"]
 resource_name = "Glass"
-texture = ExtResource("2_lntwd")
+texture = ExtResource("2_l8tw0")
 texture_region_size = Vector2i(64, 64)
 1:0/0 = 0
 1:0/0/modulate = Color(1, 0.854902, 0.756863, 1)
@@ -850,7 +858,7 @@ texture_region_size = Vector2i(64, 64)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1fs8a"]
 resource_name = "Floor"
-texture = ExtResource("3_tlsve")
+texture = ExtResource("3_e8ihg")
 texture_region_size = Vector2i(64, 64)
 1:0/0 = 0
 1:0/0/modulate = Color(0.709804, 0.219608, 0.219608, 1)
@@ -1230,20 +1238,28 @@ texture_region_size = Vector2i(64, 64)
 11:3/0/terrains_peering_bit/top_left_corner = 2
 11:3/0/terrains_peering_bit/top_side = 2
 
-[sub_resource type="Gradient" id="Gradient_vs46w"]
-colors = PackedColorArray(0, 1, 0, 1, 1, 1, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_k2own"]
-gradient = SubResource("Gradient_vs46w")
-width = 128
-height = 128
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.846154, 0.136752)
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_bve31"]
+frames = 8
+speed_scale = 16.1
+frame_0/texture = ExtResource("4_xl1yx")
+frame_1/texture = ExtResource("5_16jth")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("6_j5w3i")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("7_ew1in")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("8_iu6ew")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("9_8rbkf")
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("10_wag31")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("11_w8bx8")
+frame_7/duration = 1.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4cj4i"]
 resource_name = "Exit"
-texture = SubResource("GradientTexture2D_k2own")
+texture = SubResource("AnimatedTexture_bve31")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 
@@ -1262,7 +1278,7 @@ texture_region_size = Vector2i(64, 64)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qc2qq"]
 resource_name = "Scorch"
-texture = ExtResource("4_sk2fw")
+texture = ExtResource("12_mkq8q")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/terrain_set = 0

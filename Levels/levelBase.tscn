@@ -1,12 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://crkimwjq3y6dk"]
+[gd_scene load_steps=13 format=3 uid="uid://cbktctutdnjti"]
 
-[ext_resource type="TileSet" uid="uid://dugjqny2wd38q" path="res://TileSet.tres" id="1_62qqt"]
-[ext_resource type="Script" path="res://Level.gd" id="2_xghl8"]
-[ext_resource type="PackedScene" uid="uid://b8n2r5xk4334" path="res://Player.tscn" id="3_g7t2i"]
-[ext_resource type="PackedScene" uid="uid://p8fsxk1rvpuy" path="res://Occluder.tscn" id="4_nt24j"]
-[ext_resource type="PackedScene" path="res://ExitPing.tscn" id="5_jjtg8"]
-[ext_resource type="Texture2D" uid="uid://b8xcuq8emrc2b" path="res://ParticleFade.png" id="5_mg0gh"]
-[ext_resource type="Texture2D" uid="uid://u0smi50of1sx" path="res://void_spread.png" id="6_5ttfd"]
+[ext_resource type="TileSet" uid="uid://cy63bdj1rjo8p" path="res://TileSet.tres" id="1_yhqqe"]
+[ext_resource type="Script" path="res://Level.gd" id="2_ujwsk"]
+[ext_resource type="PackedScene" uid="uid://b2rog366pp2em" path="res://Player.tscn" id="3_47q5g"]
+[ext_resource type="PackedScene" uid="uid://p8fsxk1rvpuy" path="res://Occluder.tscn" id="4_6ubc7"]
+[ext_resource type="PackedScene" uid="uid://ckln6dxvu4yrt" path="res://ExitPing.tscn" id="5_nrm70"]
+[ext_resource type="Texture2D" uid="uid://b8xcuq8emrc2b" path="res://Assets/ParticleFade.png" id="6_4nu1o"]
 
 [sub_resource type="Gradient" id="Gradient_drr1w"]
 offsets = PackedFloat32Array(0, 0.538071, 1)
@@ -42,15 +41,36 @@ scale_max = 3.0
 scale_curve = SubResource("CurveTexture_8dvyv")
 color_ramp = SubResource("GradientTexture1D_xf1a8")
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2dwps"]
+load_path = "res://.godot/imported/void_spread.png-d51c5840822344b9c8aeab7187a5ac7f.ctex"
+
 [node name="Level" type="TileMap"]
-tile_set = ExtResource("1_62qqt")
+position = Vector2(0, 14)
+tile_set = ExtResource("1_yhqqe")
 format = 2
-script = ExtResource("2_xghl8")
-player_scene = ExtResource("3_g7t2i")
-occluder_scene = ExtResource("4_nt24j")
-ping_scene = ExtResource("5_jjtg8")
+layer_0/name = "Utility"
+layer_1/name = "Walls"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Floor"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = -1
+layer_2/tile_data = PackedInt32Array()
+script = ExtResource("2_ujwsk")
+player_scene = ExtResource("3_47q5g")
+occluder_scene = ExtResource("4_6ubc7")
+ping_scene = ExtResource("5_nrm70")
+on_color = Color(0.819608, 0.376471, 0.376471, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-76, 186)
 current = true
 
 [node name="VoidParticles" type="GPUParticles2D" parent="Camera2D"]
@@ -59,7 +79,7 @@ z_index = -5
 amount = 20
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_gl2by")
-texture = ExtResource("5_mg0gh")
+texture = ExtResource("6_4nu1o")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -71,5 +91,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("6_5ttfd")
+texture = SubResource("CompressedTexture2D_2dwps")
 stretch_mode = 1

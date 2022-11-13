@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db7mowd270o03"
-path="res://.godot/imported/ParticleFunk.png-8dc9a1e6352aa730e2845ebe48256917.ctex"
+uid="uid://bq46liygpnukh"
+path="res://.godot/imported/exit_frame3.png-8b4407e5b69c0084ca3b4ef3e91b3de1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ParticleFunk.png"
-dest_files=["res://.godot/imported/ParticleFunk.png-8dc9a1e6352aa730e2845ebe48256917.ctex"]
+source_file="res://Assets/exit_frame3.png"
+dest_files=["res://.godot/imported/exit_frame3.png-8b4407e5b69c0084ca3b4ef3e91b3de1.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ye6ck7lff8r2"
-path="res://.godot/imported/glass_tiles.png-bfb98ef123f1a9be0d3b79c1d022f08e.ctex"
+uid="uid://btuusv5yg1oqw"
+path="res://.godot/imported/exit_frame8.png-7d6e426c38905f1e82f04a4913d9b019.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://glass_tiles.png"
-dest_files=["res://.godot/imported/glass_tiles.png-bfb98ef123f1a9be0d3b79c1d022f08e.ctex"]
+source_file="res://Assets/exit_frame8.png"
+dest_files=["res://.godot/imported/exit_frame8.png-7d6e426c38905f1e82f04a4913d9b019.ctex"]
 
 [params]
 
