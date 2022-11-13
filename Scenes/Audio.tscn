@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm1npnt3kry22"]
+
+[ext_resource type="AudioStream" uid="uid://bl24o871yjlsm" path="res://Out of Sight.wav" id="1_b681h"]
+[ext_resource type="AudioStream" uid="uid://bpm3kqhfsgalr" path="res://Out of Sight Destroy.wav" id="2_lsfmt"]
+
+[node name="Audio" type="AudioStreamPlayer"]
+stream = ExtResource("1_b681h")
+autoplay = true
+
+[node name="Destruction" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_lsfmt")
+autoplay = true
+bus = &"Destroy"

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfmyar2v2rflm"]
+[gd_scene load_steps=7 format=3 uid="uid://dfmyar2v2rflm"]
 
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="1_e1p83"]
 [ext_resource type="PackedScene" uid="uid://b3hs77u3ypaj4" path="res://Scenes/Veiwer.tscn" id="1_i7wq2"]
+[ext_resource type="AudioStream" uid="uid://djkkb5moo0q2" path="res://448394__lordforklift__fuze-switch-flick.wav" id="3_2txu5"]
 
 [sub_resource type="Gradient" id="Gradient_4aua7"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -32,3 +33,6 @@ occluder = SubResource("OccluderPolygon2D_nbjn0")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" index="0"]
 polygon = PackedVector2Array(-30, -30, -30, 30, 20, 30, 0, 20, -20, 0, 0, -20, 20, -30)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="4"]
+stream = ExtResource("3_2txu5")

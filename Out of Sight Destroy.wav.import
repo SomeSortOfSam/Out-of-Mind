@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bpm3kqhfsgalr"
+path="res://.godot/imported/Out of Sight Destroy.wav-f15a03245986aada8d0d325e9d84d5ec.sample"
+
+[deps]
+
+source_file="res://Out of Sight Destroy.wav"
+dest_files=["res://.godot/imported/Out of Sight Destroy.wav-f15a03245986aada8d0d325e9d84d5ec.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

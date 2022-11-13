@@ -37,6 +37,10 @@ run/main_scene="res://Scenes/Levels/level01.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 
+[autoload]
+
+Audio="*res://Scenes/Audio.tscn"
+
 [input]
 
 ui_left={

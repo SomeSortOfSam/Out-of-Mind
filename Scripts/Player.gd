@@ -54,8 +54,10 @@ func reset(_current_cell : Vector2i, _map : TileMap):
 	tween.tween_property(self,\
 	"position",self.current_cell * map.tile_set.tile_size * 1.0 + map.tile_set.tile_size/2.0,.4)\
 	.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	AudioServer.set_bus_mute(1,true)
 	await tween.finished
 	intro()
+	
 
 func do_void_check() -> bool:
 	if void_count > MAX_VOID:
@@ -122,6 +124,7 @@ func destory_cell(cell : Vector2i) -> bool:
 	var node = map.get_node_or_null(str(cell))
 	if node:
 		node.queue_free()
+		AudioServer.set_bus_mute(1,false)
 	map.set_cells_terrain_connect(FLOOR_LAYER,[cell],0,FLOOR_TERRAIN_ID)
 	map.force_update(FLOOR_LAYER)
 	return true
