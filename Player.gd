@@ -3,15 +3,19 @@ extends Node2D
 
 const WIN_TILE_ID := 3
 const GLASS_TILE_ID := 1
+const MAX_VOID := 5
 
 @onready var map : TileMap = $".."
 @onready var raycast : RayCast2D = $RayCast2D
 
 var current_cell : Vector2i
 var tween : Tween
+var previous_direction : Vector2i
 var in_sight_set : PackedVector2Array
+var void_count := 0.0
 
 signal won
+signal requesting_restart
 
 func _ready():
 	recaculate_line_of_sight()
@@ -20,18 +24,35 @@ func _ready():
 func _process(_delta):
 	if _handle_inputs():
 		recaculate_line_of_sight()
+	if (!tween || !tween.is_running()):
+		if map.get_cell_source_id(2,current_cell) == -1:
+			move_in_direction(previous_direction)
+			void_count += 1
+			if void_count > MAX_VOID:
+				emit_signal("requesting_restart")
+				queue_free()
+		else:
+			void_count = clamp(void_count - .01, 0, MAX_VOID)
+		modulate = lerp(Color.WHITE,Color(1,1,1,0),void_count/MAX_VOID)
 
 func _handle_inputs() -> bool:
 	@warning_ignore(narrowing_conversion)
 	var input : Vector2i = Vector2i(Input.get_axis("ui_left","ui_right"), Input.get_axis("ui_up","ui_down"))
-	if (!tween || !tween.is_running()) && input != Vector2i.ZERO && map.get_cell_source_id(1,current_cell + input) == -1:
-		current_cell += input
-		tween = create_tween()
-		var _tween = tween.tween_property(self,"position",position + input * map.tile_set.tile_size * 1.0,.2)
-		if map.get_cell_source_id(0,current_cell) == WIN_TILE_ID:
-			var _signal = emit_signal("won")
+	if (!tween || !tween.is_running()) && \
+		input != Vector2i.ZERO && \
+		(input.x == 0) != (input.y == 0) && \
+		map.get_cell_source_id(1,current_cell + input) == -1:
+		move_in_direction(input)
 		return true
 	return false
+
+func move_in_direction(direction : Vector2i):
+	current_cell += direction
+	tween = create_tween()
+	var _tween = tween.tween_property(self,"position",position + direction * map.tile_set.tile_size * 1.0,.2)
+	previous_direction = direction
+	if map.get_cell_source_id(0,current_cell) == WIN_TILE_ID:
+		var _signal = emit_signal("won")
 
 func recaculate_line_of_sight():
 	for cell in map.get_used_cells(1):

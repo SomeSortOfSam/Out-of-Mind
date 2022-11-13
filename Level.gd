@@ -18,8 +18,9 @@ func _ready():
 			erase_cell(0,cell)
 	for cell in get_used_cells(1):
 		var cell_id = get_cell_source_id(1,cell)
-		spawn_occluder(cell,cell_id)
-		get_cell_tile_data(1,cell).modulate = Color.DARK_GRAY
+		if cell_id != Player.GLASS_TILE_ID:
+			spawn_occluder(cell,cell_id)
+			get_cell_tile_data(1,cell).modulate = Color.DARK_GRAY
 
 func spawn_player(cell : Vector2i):
 	var player : Player = player_scene.instantiate()
