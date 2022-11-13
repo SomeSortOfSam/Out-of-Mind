@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c35jc3pdmsmvu"]
+
+[ext_resource type="PackedScene" uid="uid://dxifh7ag5yhl8" path="res://Scenes/Levels/levelBase.tscn" id="1_osdl3"]
+[ext_resource type="PackedScene" uid="uid://6kpsvgapkgmq" path="res://Scenes/Levels/level06.tscn" id="2_r1sc7"]
+
+[node name="Level" instance=ExtResource("1_osdl3")]
+layer_0/tile_data = PackedInt32Array(-65536, 655362, 0, 196610, 720898, 3, 131074, 720898, 2, 65538, 720898, 2, 2, 720898, 2, -65534, 720898, 0, 196609, 589826, 3, 131073, 589826, 2, 65537, 589826, 2, 1, 589826, 2, -65535, 655362, 0, 196608, 589826, 3, 131072, 589826, 2, 65536, 589826, 2, 0, 589826, 2, 262143, 589826, 3, 196607, 589826, 2, 131071, 589826, 2, 65535, 589826, 2, -1, 655362, 0, 262142, 524290, 3, 196606, 524290, 1, 131070, 524290, 1, 65534, 524290, 1, -2, 524290, 0)
+layer_1/tile_data = PackedInt32Array(65535, 0, 3, 1, 0, 3, 196607, 0, 3, 131073, 0, 3, 131072, 131073, 3, 196608, 3, 0, 65536, 4, 0, -65536, 6, 0)
+next_level = ExtResource("2_r1sc7")
+on_color = Color(0.176471, 0.431373, 0.176471, 1)
+
+[node name="Camera2D" parent="." index="0"]
+position = Vector2(33, 98)

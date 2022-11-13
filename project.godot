@@ -9,19 +9,31 @@
 config_version=5
 
 _global_script_classes=[{
-"base": "Node2D",
+"base": "Veiwer",
+"class": &"Camera",
+"language": &"GDScript",
+"path": "res://Scripts/Camera.gd"
+}, {
+"base": "Veiwer",
 "class": &"Player",
 "language": &"GDScript",
-"path": "res://Player.gd"
+"path": "res://Scripts/Player.gd"
+}, {
+"base": "Node2D",
+"class": &"Veiwer",
+"language": &"GDScript",
+"path": "res://Scripts/Veiwer.gd"
 }]
 _global_script_class_icons={
-"Player": ""
+"Camera": "",
+"Player": "",
+"Veiwer": ""
 }
 
 [application]
 
 config/name="Stay Out Of Sight"
-run/main_scene="res://Levels/level01.tscn"
+run/main_scene="res://Scenes/Levels/level01.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 

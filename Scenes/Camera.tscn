@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfmyar2v2rflm"]
+
+[ext_resource type="Script" path="res://Scripts/Camera.gd" id="1_e1p83"]
+[ext_resource type="PackedScene" uid="uid://b3hs77u3ypaj4" path="res://Scenes/Veiwer.tscn" id="1_i7wq2"]
+
+[sub_resource type="Gradient" id="Gradient_4aua7"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mdqw3"]
+gradient = SubResource("Gradient_4aua7")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nbjn0"]
+polygon = PackedVector2Array(-30, 30, -30, -30, 20, -30, 0, -20, -20, 0, 0, 20, 20, 30)
+
+[node name="Camera" instance=ExtResource("1_i7wq2")]
+rotation = 1.5708
+script = ExtResource("1_e1p83")
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="1"]
+enabled = false
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = SubResource("GradientTexture2D_mdqw3")
+texture_scale = 50.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." index="2"]
+occluder = SubResource("OccluderPolygon2D_nbjn0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="3"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" index="0"]
+polygon = PackedVector2Array(-30, -30, -30, 30, 20, 30, 0, 20, -20, 0, 0, -20, 20, -30)
