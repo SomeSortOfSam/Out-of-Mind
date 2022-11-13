@@ -7,6 +7,7 @@ const EXIT_CELL_ID := 3
 @export var player_scene : PackedScene
 @export var occluder_scene : PackedScene
 @export var ping_scene : PackedScene
+@export var next_level : PackedScene
 @export var on_color : Color
 
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +17,8 @@ func _ready():
 		var cell_id = get_cell_source_id(0,cell)
 		if cell_id == PLAYER_START_CELL_ID:
 			player = spawn_player(cell)
+			player.connect("win",_on_player_win)
+			player.connect("lose",_on_player_lose)
 			erase_cell(0,cell)
 	for cell in get_used_cells(1):
 		var cell_id = get_cell_source_id(1,cell)
@@ -43,3 +46,9 @@ func spawn_ping(cell : Vector2i, player : Player):
 	var ping = ping_scene.instantiate()
 	ping.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
 	add_child(ping)
+
+func _on_player_win():
+	get_tree().change_scene_to_packed(next_level)
+
+func _on_player_lose():
+	pass
