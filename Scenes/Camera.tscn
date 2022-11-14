@@ -14,7 +14,7 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nbjn0"]
-polygon = PackedVector2Array(-32, 32, -32, -32, 16, -32, 0, -16, -16, 0, 0, 16, 16, 32)
+polygon = PackedVector2Array(-32, 32, -32, -32, 16, -32, 0, -16, -20, -15, -20, 15, 0, 16, 16, 32)
 
 [node name="Camera" instance=ExtResource("1_i7wq2")]
 rotation = 1.5708
@@ -22,6 +22,7 @@ script = ExtResource("1_e1p83")
 
 [node name="PointLight2D" type="PointLight2D" parent="." index="1"]
 enabled = false
+shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 texture = SubResource("GradientTexture2D_mdqw3")
 texture_scale = 50.0
@@ -32,13 +33,12 @@ occluder = SubResource("OccluderPolygon2D_nbjn0")
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="3"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" index="0"]
-polygon = PackedVector2Array(-32, -32, -32, 32, 16, 32, 0, 16, -16, 0, 0, -16, 16, -32)
+polygon = PackedVector2Array(-32, -32, -32, 32, 16, 32, 0, 16, -20, 15, -20, -15, 0, -16, 16, -32)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="4"]
 stream = ExtResource("3_2txu5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="5"]
-light_mask = 0
 rotation = -1.5708
 texture = ExtResource("4_tnusq")
 hframes = 2

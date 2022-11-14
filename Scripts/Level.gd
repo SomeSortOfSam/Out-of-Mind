@@ -12,7 +12,7 @@ const WALL_CELL_ID := 0
 @export var next_level : PackedScene
 @export var on_color : Color
 
-@onready var restart_label : Label = $"CanvasLayer/Restart Text"
+@onready var restart_label : Label = $"CanvasLayer/Control/Restart Text"
 @onready var camera : Camera2D = $Camera2D
 
 var ping : GPUParticles2D

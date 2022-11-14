@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1huk1fa74v12"]
 
 [ext_resource type="PackedScene" uid="uid://dxifh7ag5yhl8" path="res://Scenes/Levels/levelBase.tscn" id="1_7ig7r"]
-[ext_resource type="PackedScene" uid="uid://bla3f714f16u" path="res://Scenes/Levels/level03.tscn" id="2_nqlxo"]
+[ext_resource type="PackedScene" uid="uid://bydd87m6ob10p" path="res://Scenes/Levels/level04.tscn" id="2_dg37n"]
 
 [node name="Level" instance=ExtResource("1_7ig7r")]
 layer_0/tile_data = PackedInt32Array(196610, 720898, 3, 131074, 720898, 2, 65538, 720898, 2, 2, 720898, 2, -65534, 720898, 2, -131070, 720898, 0, 196609, 589826, 3, 131073, 589826, 2, 65537, 589826, 2, 1, 589826, 2, -65535, 589826, 2, -131071, 655362, 0, 196608, 589826, 3, 131072, 589826, 2, 65536, 589826, 2, 0, 589826, 2, -65536, 589826, 2, -131072, 655362, 0, 262143, 589826, 3, 196607, 589826, 2, 131071, 589826, 2, 65535, 589826, 2, -1, 589826, 2, -65537, 655362, 0, 262142, 589826, 3, 196606, 589826, 2, 131070, 589826, 2, 65534, 589826, 2, -2, 589826, 2, -65538, 655362, 0, 262141, 524290, 3, 196605, 524290, 1, 131069, 524290, 1, 65533, 524290, 1, -3, 524290, 1, -65539, 524290, 0)
 layer_1/tile_data = PackedInt32Array(131073, 0, 3, 196606, 0, 3, 131072, 131073, 3, 196607, 131073, 3, -2, 0, 3, -65535, 0, 3, 262142, 3, 0, -65538, 4, 0)
-next_level = ExtResource("2_nqlxo")
+next_level = ExtResource("2_dg37n")
 
 [node name="Camera2D" parent="." index="0"]
 position = Vector2(0, 64)
