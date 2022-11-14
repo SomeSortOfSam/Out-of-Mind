@@ -52,7 +52,8 @@ func reset(_current_cell : Vector2i, _map : TileMap):
 	.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	AudioServer.set_bus_mute(1,true)
 	await tween.finished
-	intro()
+	await intro()
+	recaculate_line_of_sight()
 
 func intro():
 	sprite.animation = "enter"
@@ -91,6 +92,7 @@ func _handle_inputs() -> bool:
 func move_in_direction(direction : Vector2i):
 	current_cell += direction
 	tween = create_tween()
+	@warning_ignore(return_value_discarded)
 	tween.set_parallel(true)
 	var _rotor = tween.tween_property(sprite,"rotation",Vector2(direction).angle() - PI/2,.1)
 	var _tween = tween.tween_property(self,"position",position + direction * map.tile_set.tile_size * 1.0,.2)
@@ -127,6 +129,8 @@ func destory_cell(cell : Vector2i) -> bool:
 		AudioServer.set_bus_mute(1,false)
 	map.set_cells_terrain_connect(FLOOR_LAYER,[cell],0,FLOOR_TERRAIN_ID)
 	map.force_update(FLOOR_LAYER)
+	for surrounding_cell in map.get_used_cells(FLOOR_LAYER):
+		map.get_cell_tile_data(FLOOR_LAYER,surrounding_cell).modulate = map.on_color
 	return true
 
 func _on_won():
