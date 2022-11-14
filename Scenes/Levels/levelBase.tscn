@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dxifh7ag5yhl8"]
+[gd_scene load_steps=17 format=3 uid="uid://dxifh7ag5yhl8"]
 
 [ext_resource type="TileSet" uid="uid://cy63bdj1rjo8p" path="res://TileSet.tres" id="1_yhqqe"]
 [ext_resource type="Script" path="res://Scripts/Level.gd" id="2_ujwsk"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b8xcuq8emrc2b" path="res://Assets/ParticleFade.png" id="6_4nu1o"]
 [ext_resource type="PackedScene" uid="uid://ckln6dxvu4yrt" path="res://Scenes/ExitPing.tscn" id="6_5jb7e"]
 [ext_resource type="PackedScene" uid="uid://baxwprd8glkui" path="res://Scenes/Win.tscn" id="7_r45ux"]
+[ext_resource type="Texture2D" uid="uid://bwllayslsvjf0" path="res://Assets/void_spread.png" id="9_gdxu5"]
 
 [sub_resource type="Gradient" id="Gradient_drr1w"]
 offsets = PackedFloat32Array(0, 0.538071, 1)
@@ -43,11 +44,59 @@ scale_max = 3.0
 scale_curve = SubResource("CurveTexture_8dvyv")
 color_ramp = SubResource("GradientTexture1D_xf1a8")
 
+[sub_resource type="GDScript" id="GDScript_cc1nj"]
+script/source = "extends TextureRect
+
+var scroll_vector : Vector2
+
+func _init():
+	set_anchors_preset(Control.PRESET_FULL_RECT)
+	ignore_texture_size = true
+	stretch_mode = TextureRect.STRETCH_TILE
+	mouse_filter = MOUSE_FILTER_IGNORE
+
+func _ready():
+	scroll_vector = Vector2(randf_range(-5,5),randf_range(-5,5))
+
+func _process(_delta):
+	scroll_negitive()
+	scroll_x()
+	scroll_y()
+
+func scroll_negitive():
+	if scroll_vector.x < 0 :
+		if -offset_left < texture.get_size().x:
+			offset_left += scroll_vector.x
+		else: 
+			offset_left = 0
+		offset_right = 10
+	if scroll_vector.y < 0:
+		if -offset_top < texture.get_size().y:
+			offset_top += scroll_vector.y
+		else: 
+			offset_top = 0
+		offset_bottom = 10
+
+func scroll_x():
+	if scroll_vector.x > 0:
+		if offset_left < 0 :
+			position.x += scroll_vector.x
+		else: 
+			position.x = -texture.get_size().x
+		offset_right = 10
+
+func scroll_y():
+	if scroll_vector.y > 0:
+		if offset_top < 0 :
+			position.y += scroll_vector.y
+		else: 
+			position.y = -texture.get_size().y
+		offset_bottom = 10
+"
+
 [sub_resource type="LabelSettings" id="LabelSettings_1erum"]
 font_size = 100
 font_color = Color(0.184314, 0.184314, 0.184314, 0.494118)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2dwps"]
 
 [node name="Level" type="TileMap"]
 texture_filter = 1
@@ -85,8 +134,31 @@ metadata/_edit_lock_ = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="Restart Text" type="Label" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_gdxu5")
+ignore_texture_size = true
+stretch_mode = 1
+script = SubResource("GDScript_cc1nj")
+metadata/_edit_lock_ = true
+
+[node name="Restart Text" type="Label" parent="CanvasLayer/Control"]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -96,15 +168,4 @@ text = "R to Restart"
 label_settings = SubResource("LabelSettings_1erum")
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_lock_ = true
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("CompressedTexture2D_2dwps")
-stretch_mode = 1
 metadata/_edit_lock_ = true

@@ -12,3 +12,9 @@ on_color = Color(0.788235, 0.286275, 0.294118, 1)
 [node name="Camera2D" parent="." index="0"]
 position = Vector2(-28, 15)
 metadata/_edit_lock_ = true
+
+[node name="Restart Text" parent="CanvasLayer/Control" index="0"]
+layout_mode = 3
+
+[node name="TextureRect" parent="CanvasLayer/Control" index="1"]
+layout_mode = 3
