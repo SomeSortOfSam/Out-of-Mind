@@ -49,6 +49,7 @@ font_color = Color(0.184314, 0.184314, 0.184314, 0.494118)
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2dwps"]
 
 [node name="Level" type="TileMap"]
+texture_filter = 1
 position = Vector2(0, 14)
 tile_set = ExtResource("1_yhqqe")
 format = 2

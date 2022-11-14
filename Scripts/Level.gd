@@ -130,6 +130,7 @@ func spawn_camera(cell : Vector2i):
 func spawn_ping(cell : Vector2i):
 	ping = ping_scene.instantiate()
 	ping.position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
+	ping.get_child(0).position = cell * tile_set.tile_size * 1.0 + tile_set.tile_size/2.0
 	add_child(ping)
 
 func _on_player_win():
@@ -141,14 +142,15 @@ func _on_player_win():
 	get_tree().change_scene_to_packed(next_level)
 
 func _on_player_lose():
-	ping.visible = false
+	ping.emitting = false
+	ping.get_child(0).emitting = true #break FX
 	@warning_ignore(return_value_discarded)
 	create_tween().tween_property(restart_label,"modulate", Color.WHITE,3)
 	@warning_ignore(return_value_discarded)
 	create_tween().tween_property(self,"modulate",Color(1,1,1,0),1.5).set_ease(Tween.EASE_OUT)
 
 func _on_player_saw_exit():
-	ping.visible = false
+	ping.emitting = false
 
 func _on_camera_turned_on(seen_tiles : PackedVector2Array):
 	player.out_of_sight_exceptions.append_array(seen_tiles)

@@ -190,6 +190,7 @@ animations = [{
 
 [node name="Player" instance=ExtResource("1_6hpu1")]
 top_level = true
+texture_filter = 1
 script = ExtResource("1_w4t0v")
 
 [node name="PointLight2D" type="PointLight2D" parent="." index="1"]
