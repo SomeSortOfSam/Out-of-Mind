@@ -32,8 +32,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Stay Out Of Sight"
-run/main_scene="res://Scenes/Levels/level01.tscn"
+config/name="Out of Mind"
+run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 

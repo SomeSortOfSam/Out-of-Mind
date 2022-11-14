@@ -1,7 +1,9 @@
-[gd_scene load_steps=44 format=3 uid="uid://oxkd1h4j02jf"]
+[gd_scene load_steps=46 format=3 uid="uid://oxkd1h4j02jf"]
 
 [ext_resource type="Texture2D" uid="uid://c0iibn0x4w2lb" path="res://Assets/OOM_Splash.png" id="1_405vu"]
+[ext_resource type="Script" path="res://Scenes/MainMenu.gd" id="1_kq3e3"]
 [ext_resource type="Texture2D" uid="uid://b8xcuq8emrc2b" path="res://Assets/ParticleFade.png" id="1_suo75"]
+[ext_resource type="PackedScene" uid="uid://cmqf0t22n65yw" path="res://Scenes/Levels/level01.tscn" id="2_ak0jk"]
 [ext_resource type="Texture2D" uid="uid://ckiyw1qrmfu6m" path="res://Assets/play_button1.png" id="2_fp3ne"]
 [ext_resource type="Texture2D" uid="uid://n0ykq4qbkdi0" path="res://Assets/play_button3.png" id="3_3bmvv"]
 [ext_resource type="Texture2D" uid="uid://cjfpn6p2hqhqc" path="res://Assets/subtitle.png" id="3_xs21d"]
@@ -231,6 +233,8 @@ _data = {
 
 [node name="MainMenu" type="Node2D"]
 texture_filter = 1
+script = ExtResource("1_kq3e3")
+first_scene = ExtResource("2_ak0jk")
 
 [node name="Vortex" type="GPUParticles2D" parent="."]
 position = Vector2(1054, 342)
@@ -289,3 +293,7 @@ texture_normal = ExtResource("8_j5s1c")
 texture_pressed = ExtResource("9_6ct8q")
 texture_hover = ExtResource("10_ijafh")
 stretch_mode = 4
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
