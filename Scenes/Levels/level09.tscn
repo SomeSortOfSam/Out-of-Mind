@@ -11,3 +11,9 @@ next_level = ExtResource("2_pe7xr")
 [node name="Camera2D" parent="." index="0"]
 position = Vector2(129, 82)
 zoom = Vector2(0.9, 0.9)
+
+[node name="TextureRect" parent="CanvasLayer/Control" index="0"]
+layout_mode = 3
+
+[node name="Restart Text" parent="CanvasLayer/Control" index="1"]
+layout_mode = 3
